@@ -1,17 +1,12 @@
-package entities;
+package com.stwitter.entity;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
  */
-@DynamicUpdate
+@Entity
 @Table(name = "Place")
 public class Place {
     @Id
@@ -71,5 +66,21 @@ public class Place {
 
     public void setLongtitude(Double longtitude) {
         this.longtitude = longtitude;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Place place = (Place) o;
+
+        return id.equals(place.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

@@ -1,6 +1,4 @@
-package entities;
-
-import org.hibernate.annotations.DynamicUpdate;
+package com.stwitter.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +7,7 @@ import java.util.Date;
  * Created by A.Shcherbina
  * on 10.07.2016.
  */
-@DynamicUpdate
+@Entity
 @Table(name = "PERSON")
 public class Person {
     @Id
@@ -70,5 +68,21 @@ public class Person {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        return id.equals(person.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

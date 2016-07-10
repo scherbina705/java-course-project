@@ -1,4 +1,4 @@
-package dao;
+package com.stwitter.dao;
 
 /**
  * Created by A.Shcherbina

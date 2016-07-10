@@ -1,17 +1,12 @@
-package entities;
+package com.stwitter.entity;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
  */
-@DynamicUpdate
+@Entity
 @Table(name = "HOBBY")
 public class Hobby {
     @Id
@@ -24,6 +19,11 @@ public class Hobby {
     private String description;
 
     public Hobby() {
+    }
+
+    public Hobby(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public Long getId() {
@@ -48,5 +48,21 @@ public class Hobby {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Hobby hobby = (Hobby) o;
+
+        return id.equals(hobby.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
