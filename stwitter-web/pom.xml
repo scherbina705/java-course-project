@@ -3,25 +3,25 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>parent</artifactId>
+        <artifactId>stwitter-parent</artifactId>
         <groupId>com.stwitter</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>web</artifactId>
+    <artifactId>stwitter-web</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
-        <dao.version>1.0-SNAPSHOT</dao.version>
+        <stwitter.dao.version>1.0-SNAPSHOT</stwitter.dao.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.course-project</groupId>
-            <artifactId>dao</artifactId>
-            <version>${dao.version}</version>
+            <groupId>com.stwitter</groupId>
+            <artifactId>stwitter-dao</artifactId>
+            <version>${stwitter.dao.version}</version>
         </dependency>
     </dependencies>
 
