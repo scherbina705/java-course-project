@@ -5,23 +5,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created by A.Shcherbina
  * on 19.07.2016.
  */
 @Controller
-public class MainController {
-    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+public class HomeController {
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    @RequestMapping({"/", "/home"})
     public String home(Locale locale, Model model) {
         logger.info("Welcome home! The client locale is {}.", locale);
 
