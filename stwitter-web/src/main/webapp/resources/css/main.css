@@ -1,0 +1,30 @@
+/*[class*="col-"] {*/
+    /*border:1px solid red;*/
+/*}*/
+
+[class*="row"] {
+border:1px solid red;
+}
+
+#menu{
+    margin: 0px;
+}
+
+#main-content {
+    padding: 10px;
+    background-color: aliceblue;
+}
+
+.stwitt-block {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #888888;
+    float: left;
+    clear: none;
+}
+
+.stwitt-content .avatar {
+    padding-left: 85px;
+}
