@@ -5,6 +5,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/resources/css/main.css">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <jsp:useBean id="test" scope="request" type="com.stwitter.controller.Test"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -51,7 +53,9 @@
                         <a href="/temp.html">Temp tempov</a>
                     </div>
                     <div class="stwitt-text">
-                        <p>Один из наших сотрудников поехал в отпуск и взял с собой пузырёк с красной краской. И знаете зачем? Чтобы в случае терроризма - стрельбы в общественных местах, притворится мёртвым, вылив её на себя. Шёл 2016 год...</p>
+                        <p>Один из наших сотрудников поехал в отпуск и взял с собой пузырёк с красной краской. И знаете
+                            зачем? Чтобы в случае терроризма - стрельбы в общественных местах, притворится мёртвым,
+                            вылив её на себя. Шёл 2016 год... ${test.abc}</p>
                     </div>
                     <div class="stwitt-meta-info">
                         <p><em>&rarr; Posted on 12.07.2016 at 16:45</em></p>

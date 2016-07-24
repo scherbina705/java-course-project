@@ -22,9 +22,16 @@
         <tomcat-plugin.version>2.2</tomcat-plugin.version>
         <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
         <maven-resources-plugin.version>2.7</maven-resources-plugin.version>
+        <stwitter-core.version>1.0-SNAPSHOT</stwitter-core.version>
     </properties>
 
     <dependencies>
+        <!--TODO: figure out why it fails application!!!-->
+        <!--<dependency>-->
+        <!--<groupId>com.stwitter</groupId>-->
+        <!--<artifactId>stwitter-core</artifactId>-->
+        <!--<version>${stwitter-core.version}</version>-->
+        <!--</dependency>-->
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
