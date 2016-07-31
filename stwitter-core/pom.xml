@@ -22,11 +22,6 @@
             <artifactId>stwitter-dao</artifactId>
             <version>${stwitter-dao.version}</version>
         </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.4</version>
-        </dependency>
     </dependencies>
 
 </project>
