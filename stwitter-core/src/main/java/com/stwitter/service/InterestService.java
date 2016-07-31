@@ -1,4 +1,4 @@
-package java.com.stwitter.service;
+package com.stwitter.service;
 
 /**
  * Created by A.Shcherbina

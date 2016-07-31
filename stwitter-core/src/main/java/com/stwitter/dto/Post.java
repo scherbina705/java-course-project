@@ -1,33 +1,21 @@
 package com.stwitter.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 /**
  * Created by A.Shcherbina
  * on 24.07.2016.
  */
 public class Post {
-    private LocalDate creationDate;
-    private LocalTime creationTime;
+    private Long creationDateTime;
     private Long postId;
     private String postText;
     private User author;
 
-    public LocalDate getCreationDate() {
-        return creationDate;
+    public Long getCreationDateTime() {
+        return creationDateTime;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public LocalTime getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(LocalTime creationTime) {
-        this.creationTime = creationTime;
+    public void setCreationDateTime(Long creationDateTime) {
+        this.creationDateTime = creationDateTime;
     }
 
     public Long getPostId() {

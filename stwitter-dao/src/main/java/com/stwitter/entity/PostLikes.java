@@ -1,5 +1,8 @@
 package com.stwitter.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,76 +14,65 @@ import java.io.Serializable;
 @Table(name = "POST_LIKES")
 public class PostLikes implements Serializable {
 
-    @EmbeddedId
-    private PersonPost personPost;
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "POST_ID", insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "FK_POST_LIKES_POST")
+    )
+    private Post post;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    @Id
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "FK_POST_LIKES_PERSON")
+    )
+    private Person person;
 
-        PostLikes postLikes = (PostLikes) o;
+    public PostLikes(Person person, Post post) {
+        this.person = person;
+        this.post = post;
+    }
 
-        return personPost.equals(postLikes.personPost);
+    public Post getPost() {
+        return post;
+    }
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override
     public int hashCode() {
-        return personPost.hashCode();
+        return new HashCodeBuilder(17, 37)
+                .append(person)
+                .append(post)
+                .toHashCode();
     }
 
-    @Embeddable
-    public static class PersonPost implements Serializable {
-
-        @ManyToOne
-        @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false,
-                foreignKey = @ForeignKey(name = "FK_POST_LIKES_PERSON")
-        )
-        private Person person;
-
-        @ManyToOne
-        @JoinColumn(name = "POST_ID", insertable = false, updatable = false,
-                foreignKey = @ForeignKey(name = "FK_POST_LIKES_POST")
-        )
-        private Post post;
-
-        public PersonPost() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            PersonPost that = (PersonPost) o;
-
-            return person.getId().equals(that.person.getId())
-                    && post.getId().equals(that.post.getId());
+        if (o == null || getClass() != o.getClass()) {
+            return false;
         }
 
-        @Override
-        public int hashCode() {
-            int result = person.hashCode();
-            result = 31 * result + post.hashCode();
-            return result;
-        }
+        PostLikes postLikes = (PostLikes) o;
 
-        public Person getPerson() {
-            return person;
-        }
-
-        public void setPerson(Person person) {
-            this.person = person;
-        }
-
-        public Post getPost() {
-            return post;
-        }
-
-        public void setPost(Post post) {
-            this.post = post;
-        }
-
+        return new EqualsBuilder()
+                .append(person, postLikes.person)
+                .append(post, postLikes.post)
+                .isEquals();
     }
 }

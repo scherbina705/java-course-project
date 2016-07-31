@@ -1,0 +1,11 @@
+#registration-form {
+    margin: 10px;
+}
+
+#hobbies {
+    margin: 10px 10px 25px 10px;
+}
+
+#nickname, #email, #pwd {
+    width: 500px;
+}

@@ -1,8 +1,16 @@
 package com.stwitter.dao;
 
+import com.stwitter.entity.Place;
+
 /**
- * Created by A.Shcherbina
- * on 10.07.2016.
+ * (c) Swissquote 7/30/16
+ *
+ * @author Shcherbina A.
  */
-public class PlaceDao {
+public interface PlaceDao {
+    Place getPlaceById(Long placeId);
+
+    Place getPlaceForPost(Long postId);
+
+    Long savePlace(Place place);
 }

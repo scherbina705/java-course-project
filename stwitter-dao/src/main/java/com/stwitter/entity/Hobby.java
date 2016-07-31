@@ -1,5 +1,6 @@
 package com.stwitter.entity;
 
+
 import javax.persistence.*;
 
 /**
@@ -18,12 +19,12 @@ public class Hobby {
 
     private String description;
 
-    public Hobby() {
-    }
-
     public Hobby(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+
+    public Hobby() {
     }
 
     public Long getId() {

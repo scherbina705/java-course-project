@@ -24,6 +24,13 @@ public class Place {
     //TODO: Find out in which format to store
     private Double longtitude;
 
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "POST_ID",
+            foreignKey = @ForeignKey(name = "FK_PLACE_POST")
+    )
+    private Post post;
+
     public Place() {
 
     }
@@ -34,6 +41,14 @@ public class Place {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public String getTitle() {

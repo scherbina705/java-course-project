@@ -1,9 +1,8 @@
-package java.com.stwitter.service.impl;
+package com.stwitter.service.impl;
 
 
+import com.stwitter.service.PersonService;
 import org.springframework.stereotype.Service;
-
-import java.com.stwitter.service.PersonService;
 
 /**
  * Created by A.Shcherbina

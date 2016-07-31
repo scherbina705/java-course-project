@@ -21,11 +21,17 @@ public class Post {
     @Column(name = "PLACE_TIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date placeTime;
+
     @ManyToOne
+    @MapsId
     @JoinColumn(name = "PERSON_ID",
             foreignKey = @ForeignKey(name = "FK_POST_PERSON")
     )
     private Person person_id;
+
+    @OneToOne
+    @JoinColumn(name = "place_id")
+    private Place place;
 
     public Long getId() {
         return id;

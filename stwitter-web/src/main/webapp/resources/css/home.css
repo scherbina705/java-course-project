@@ -1,0 +1,48 @@
+/*[class*="col-"] {*/
+/*border:1px solid red;*/
+/*}*/
+
+/*[class*="row"] {*/
+/*border:1px solid red;*/
+/*}*/
+
+.avatar {
+    padding: 0;
+}
+
+#menu {
+    margin: 0;
+}
+
+#main-content {
+    height: 100%;
+    padding-left: 30px;
+    padding-right: 40px;
+    background-color: aliceblue;
+}
+
+.stwitt-block {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #888888;
+    float: left;
+    clear: none;
+}
+
+.stwitt-content {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.avatar, .stwitt-content {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.stwitt-meta-info {
+    /*position: absolute;*/
+    /*right: 65px;*/
+}

@@ -1,6 +1,9 @@
 package com.stwitter.entity;
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,15 +16,74 @@ import java.util.Date;
 @Entity
 @Table(name = "FRIENDSHIP")
 public class Friendship implements Serializable {
+    @Id
+    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "FK1_FRIENDSHIP_PERSON")
+    )
+    private Person person;
 
-    @EmbeddedId
-    private PersonFriend personFriend;
-
+    @Id
+    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "FRIEND_ID", insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "FK2_FRIENDSHIP_PERSON")
+    )
+    private Person friend;
     @Column(name = "DATE_FROM")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFrom;
 
     public Friendship() {
+    }
+
+    public Friendship(Date dateFrom, Person friend, Person person) {
+        this.dateFrom = dateFrom;
+        this.friend = friend;
+        this.person = person;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Friendship that = (Friendship) o;
+
+        return new EqualsBuilder()
+                .append(person, that.person)
+                .append(friend, that.friend)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(person)
+                .append(friend)
+                .toHashCode();
+    }
+
+    public Person getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Person friend) {
+        this.friend = friend;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Date getDateFrom() {
@@ -30,83 +92,5 @@ public class Friendship implements Serializable {
 
     public void setDateFrom(Date dateFrom) {
         this.dateFrom = dateFrom;
-    }
-
-    public PersonFriend getPersonFriend() {
-        return personFriend;
-    }
-
-    public void setPersonFriend(PersonFriend personFriend) {
-        this.personFriend = personFriend;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Friendship that = (Friendship) o;
-
-        return personFriend.equals(that.personFriend);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return personFriend.hashCode();
-    }
-
-    @Embeddable
-    public static class PersonFriend implements Serializable {
-
-        @ManyToOne
-        @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false,
-                foreignKey = @ForeignKey(name = "FK1_FRIENDSHIP_PERSON")
-        )
-        private Person person;
-
-        @ManyToOne
-        @JoinColumn(name = "FRIEND_ID", insertable = false, updatable = false,
-                foreignKey = @ForeignKey(name = "FK2_FRIENDSHIP_PERSON")
-        )
-        private Person friend;
-
-        public PersonFriend() {
-        }
-
-        public Person getFriend() {
-            return friend;
-        }
-
-        public void setFriend(Person friend) {
-            this.friend = friend;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            PersonFriend that = (PersonFriend) o;
-
-            return person.getId().equals(that.person.getId())
-                    && friend.getId().equals(that.friend.getId());
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = person.getId().hashCode();
-            result = 31 * result + friend.getId().hashCode();
-            return result;
-        }
-
-        public Person getPerson() {
-            return person;
-        }
-
-        public void setPerson(Person person) {
-            this.person = person;
-        }
     }
 }

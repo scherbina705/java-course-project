@@ -1,8 +1,20 @@
 package com.stwitter.dao;
 
+import com.stwitter.entity.Post;
+
+import java.util.List;
+
 /**
- * Created by A.Shcherbina
- * on 10.07.2016.
+ * (c) Swissquote 7/30/16
+ *
+ * @author Shcherbina A.
  */
-public class PostDao {
+public interface PostDao {
+    Post getPostById(Long postId);
+
+    List<Post> getLatestPosts(Integer postsNumber);
+
+    List<Post> getPostsForPerson(Long personId);
+
+    Long savePost(Post post);
 }

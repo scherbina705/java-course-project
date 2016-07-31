@@ -2,6 +2,7 @@ package com.stwitter.entity;
 
 import javax.persistence.*;
 
+
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
@@ -19,14 +20,15 @@ public class Message {
     @Column(name = "TIME_SENT")
     private String timeSent;
 
-
     @ManyToOne
+    @MapsId
     @JoinColumn(name = "PERSON_FROM", insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "FK1_MESSAGE_PERSON")
     )
     private Person personFrom;
 
     @ManyToOne
+    @MapsId
     @JoinColumn(name = "PERSON_TO", insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "FK2_MESSAGE_PERSON")
     )

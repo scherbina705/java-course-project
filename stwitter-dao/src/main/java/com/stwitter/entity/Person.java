@@ -1,7 +1,11 @@
 package com.stwitter.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by A.Shcherbina
@@ -21,13 +25,31 @@ public class Person {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "LOGIN")
+    @NaturalId
+    private String login;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private Set<Hobby> hobbies = new HashSet<>();
+
+
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    private String nickname;
-
     public Person() {
 
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public Set<Hobby> getHobbies() {
+        return hobbies;
     }
 
     public Long getId() {
@@ -60,14 +82,6 @@ public class Person {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     @Override

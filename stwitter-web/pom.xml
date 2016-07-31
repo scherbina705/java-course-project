@@ -23,16 +23,22 @@
         <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
         <maven-resources-plugin.version>2.7</maven-resources-plugin.version>
         <stwitter-core.version>1.0-SNAPSHOT</stwitter-core.version>
+        <jackson.version>1.9.10</jackson.version>
     </properties>
 
     <dependencies>
-        <!--TODO: figure out why it fails application!!!-->
-        <!--<dependency>-->
-        <!--<groupId>com.stwitter</groupId>-->
-        <!--<artifactId>stwitter-core</artifactId>-->
-        <!--<version>${stwitter-core.version}</version>-->
-        <!--</dependency>-->
-        <!-- Spring -->
+        <dependency>
+            <groupId>com.stwitter</groupId>
+            <artifactId>stwitter-core</artifactId>
+            <version>${stwitter-core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hibernate-core</artifactId>
+                    <groupId>org.hibernate</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -87,6 +93,22 @@
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
         </dependency>
+        <!---->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.4</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -95,6 +117,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>${tomcat-plugin.version}</version>
                 <configuration>
+                    <port>8089</port>
                     <path>/</path>
                 </configuration>
             </plugin>

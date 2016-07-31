@@ -1,4 +1,4 @@
-package java.com.stwitter.service;
+package com.stwitter.service;
 
 import com.stwitter.dto.Post;
 

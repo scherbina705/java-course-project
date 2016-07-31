@@ -1,8 +1,18 @@
 package com.stwitter.dao;
 
+import com.stwitter.entity.Message;
+
 /**
- * Created by A.Shcherbina
- * on 10.07.2016.
+ * (c) Swissquote 7/30/16
+ *
+ * @author Shcherbina A.
  */
-public class MessageDao {
+public interface MessageDao {
+    Long saveMessage(Message message);
+
+    Message getMessageById(Long messageId);
+
+    Message getMessagesFromUser(Long personId);
+
+    Message getMessagesToUser(Long personId);
 }
