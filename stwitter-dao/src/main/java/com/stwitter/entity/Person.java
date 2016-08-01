@@ -29,7 +29,7 @@ public class Person {
     @NaturalId
     private String login;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Hobby> hobbies = new HashSet<>();
 
 
@@ -91,12 +91,12 @@ public class Person {
 
         Person person = (Person) o;
 
-        return id.equals(person.id);
+        return login.equals(person.login);
 
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return login.hashCode();
     }
 }

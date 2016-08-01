@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface PersonDao extends GenericDao<Person, Long> {
 
-    Person getPersonByLogin(String login);
+    Person findByLogin(String login);
 
 }

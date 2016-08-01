@@ -9,5 +9,5 @@ import com.stwitter.entity.Place;
  */
 public interface PlaceDao extends GenericDao<Place, Long> {
 
-    Place getPlaceForPost(Long postId);
+    Place findPlaceForPost(Long postId);
 }

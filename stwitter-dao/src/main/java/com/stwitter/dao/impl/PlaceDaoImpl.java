@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlaceDaoImpl extends GenericDaoImpl<Place, Long> implements PlaceDao {
 
     @Override
-    public Place getPlaceForPost(Long postId) {
-        Query query = getSession().createQuery("select p from Place p where p.post_id like :id").setLong("id", postId);
+    public Place findPlaceForPost(Long postId) {
+        Query query = getSession().createQuery("from Place p where p.post.id like :id").setLong("id", postId);
         return (Place) query.uniqueResult();
     }
 

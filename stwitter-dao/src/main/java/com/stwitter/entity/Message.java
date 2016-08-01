@@ -1,6 +1,7 @@
 package com.stwitter.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -18,18 +19,17 @@ public class Message {
     private String content;
 
     @Column(name = "TIME_SENT")
-    private String timeSent;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeSent;
 
     @ManyToOne
-    @MapsId
-    @JoinColumn(name = "PERSON_FROM", insertable = false, updatable = false,
+    @JoinColumn(name = "PERSON_FROM",
             foreignKey = @ForeignKey(name = "FK1_MESSAGE_PERSON")
     )
     private Person personFrom;
 
     @ManyToOne
-    @MapsId
-    @JoinColumn(name = "PERSON_TO", insertable = false, updatable = false,
+    @JoinColumn(name = "PERSON_TO",
             foreignKey = @ForeignKey(name = "FK2_MESSAGE_PERSON")
     )
     private Person personTo;
@@ -48,5 +48,45 @@ public class Message {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getTimeSent() {
+        return timeSent;
+    }
+
+    public void setTimeSent(Date timeSent) {
+        this.timeSent = timeSent;
+    }
+
+    public Person getPersonFrom() {
+        return personFrom;
+    }
+
+    public void setPersonFrom(Person personFrom) {
+        this.personFrom = personFrom;
+    }
+
+    public Person getPersonTo() {
+        return personTo;
+    }
+
+    public void setPersonTo(Person personTo) {
+        this.personTo = personTo;
     }
 }

@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PersonDaoImpl extends GenericDaoImpl<Person, Long> implements PersonDao {
     @Override
-    public Person getPersonByLogin(String login) {
-        Query query = getSession().createQuery("select p from Person h where p.login like :login").setString("login", login);
+    public Person findByLogin(String login) {
+        Query query = getSession().createQuery("select p from Person p where p.login like :login").setString("login", login);
         return (Person) query.uniqueResult();
     }
 

@@ -27,7 +27,7 @@ public class Post {
     @JoinColumn(name = "PERSON_ID",
             foreignKey = @ForeignKey(name = "FK_POST_PERSON")
     )
-    private Person person_id;
+    private Person person;
 
     @OneToOne
     @JoinColumn(name = "place_id")
@@ -65,12 +65,12 @@ public class Post {
         this.placeTime = placeTime;
     }
 
-    public Person getPerson_id() {
-        return person_id;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPerson_id(Person person_id) {
-        this.person_id = person_id;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

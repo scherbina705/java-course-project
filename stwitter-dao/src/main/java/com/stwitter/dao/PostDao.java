@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface PostDao extends GenericDao<Post, Long> {
 
-    List<Post> getLatestPosts(Integer postsNumber);
+    List<Post> findLatestPosts(Integer postsNumber);
 
-    List<Post> getPostsForPerson(Long personId);
+    List<Post> findPostsFromPerson(Long personId);
 
 }

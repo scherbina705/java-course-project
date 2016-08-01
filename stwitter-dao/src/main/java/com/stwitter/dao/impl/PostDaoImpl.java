@@ -17,13 +17,13 @@ import java.util.List;
 public class PostDaoImpl extends GenericDaoImpl<Post, Long> implements PostDao {
 
     @Override
-    public List<Post> getLatestPosts(Integer postsNumber) {
+    public List<Post> findLatestPosts(Integer postsNumber) {
         Query query = getSession().createQuery("select p from Post p order by p.placeTime desc").setMaxResults(postsNumber);
         return query.list();
     }
 
     @Override
-    public List<Post> getPostsForPerson(Long personId) {
+    public List<Post> findPostsFromPerson(Long personId) {
         Query query = getSession().createQuery("select p from Post p where p.person like :id").setLong("id", personId);
         return query.list();
     }

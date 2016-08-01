@@ -1,6 +1,8 @@
 package com.stwitter.entity;
 
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 
 /**
@@ -15,6 +17,7 @@ public class Hobby {
     @Column(name = "HOBBY_ID")
     private Long id;
 
+    @NaturalId
     private String title;
 
     private String description;
@@ -58,12 +61,12 @@ public class Hobby {
 
         Hobby hobby = (Hobby) o;
 
-        return id.equals(hobby.id);
+        return title.equals(hobby.title);
 
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return title.hashCode();
     }
 }

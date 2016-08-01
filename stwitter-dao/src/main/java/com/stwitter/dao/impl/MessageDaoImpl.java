@@ -6,6 +6,8 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
@@ -15,14 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class MessageDaoImpl extends GenericDaoImpl<Message, Long> implements MessageDao {
 
     @Override
-    public Message getMessagesFromUser(Long personId) {
-        Query query = getSession().createQuery("select m from Message m where m.personFrom like :id").setLong("id", personId);
-        return (Message) query.uniqueResult();
+    public List<Message> findMessagesFromUser(Long personId) {
+        Query query = getSession().createQuery("from Message m where m.personFrom.id = :personId").setParameter("personId", personId);
+        return query.list();
     }
 
     @Override
-    public Message getMessagesToUser(Long personId) {
-        Query query = getSession().createQuery("select m from Message m where m.personTo like :id").setLong("id", personId);
-        return (Message) query.uniqueResult();
+    public List<Message> findMessagesToUser(Long personId) {
+        Query query = getSession().createQuery("from Message m where m.personTo.id = :personId").setParameter("personId", personId);
+        return query.list();
     }
 }
