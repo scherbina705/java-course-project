@@ -7,10 +7,7 @@ import com.stwitter.entity.Message;
  *
  * @author Shcherbina A.
  */
-public interface MessageDao {
-    Long saveMessage(Message message);
-
-    Message getMessageById(Long messageId);
+public interface MessageDao extends GenericDao<Message, Long> {
 
     Message getMessagesFromUser(Long personId);
 

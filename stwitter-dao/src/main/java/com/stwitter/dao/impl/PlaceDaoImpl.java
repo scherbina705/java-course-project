@@ -12,12 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Transactional
-public class PlaceDaoImpl extends AbstractDao implements PlaceDao {
-    @Override
-    public Place getPlaceById(Long placeId) {
-        Query query = getSession().createQuery("select p from Place p where p.id like :id").setLong("id", placeId);
-        return (Place) query.uniqueResult();
-    }
+public class PlaceDaoImpl extends GenericDaoImpl<Place, Long> implements PlaceDao {
 
     @Override
     public Place getPlaceForPost(Long postId) {
@@ -25,8 +20,4 @@ public class PlaceDaoImpl extends AbstractDao implements PlaceDao {
         return (Place) query.uniqueResult();
     }
 
-    @Override
-    public Long savePlace(Place place) {
-        return (Long) getSession().save(place);
-    }
 }

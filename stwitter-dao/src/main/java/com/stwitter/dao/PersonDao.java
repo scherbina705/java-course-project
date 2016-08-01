@@ -9,10 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Shcherbina A.
  */
 @Transactional
-public interface PersonDao {
-    Person getPersonById(Long personId);
+public interface PersonDao extends GenericDao<Person, Long> {
 
     Person getPersonByLogin(String login);
 
-    Long savePerson(Person person);
 }

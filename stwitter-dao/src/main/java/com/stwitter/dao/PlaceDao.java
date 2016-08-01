@@ -7,10 +7,7 @@ import com.stwitter.entity.Place;
  *
  * @author Shcherbina A.
  */
-public interface PlaceDao {
-    Place getPlaceById(Long placeId);
+public interface PlaceDao extends GenericDao<Place, Long> {
 
     Place getPlaceForPost(Long postId);
-
-    Long savePlace(Place place);
 }

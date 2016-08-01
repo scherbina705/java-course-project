@@ -14,25 +14,18 @@ import java.util.List;
  */
 @Component
 @Transactional
-public class PostDaoImpl extends AbstractDao implements PostDao {
-    @Override
-    public Post getPostById(Long postId) {
-        Query query = getSession().createQuery("select p from Post p where p.id like :id").setLong("id", postId);
-        return (Post) query.uniqueResult();
-    }
+public class PostDaoImpl extends GenericDaoImpl<Post, Long> implements PostDao {
 
     @Override
     public List<Post> getLatestPosts(Integer postsNumber) {
-        return null;
+        Query query = getSession().createQuery("select p from Post p order by p.placeTime desc").setMaxResults(postsNumber);
+        return query.list();
     }
 
     @Override
     public List<Post> getPostsForPerson(Long personId) {
-        return null;
+        Query query = getSession().createQuery("select p from Post p where p.person like :id").setLong("id", personId);
+        return query.list();
     }
 
-    @Override
-    public Long savePost(Post post) {
-        return (Long) getSession().save(post);
-    }
 }

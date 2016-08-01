@@ -7,8 +7,6 @@ import com.stwitter.entity.Hobby;
  *
  * @author Shcherbina A.
  */
-public interface HobbyDao {
-    Hobby getHobbyById(Long hobbyId);
+public interface HobbyDao extends GenericDao<Hobby, Long> {
 
-    Long saveHobby(Hobby hobby);
 }

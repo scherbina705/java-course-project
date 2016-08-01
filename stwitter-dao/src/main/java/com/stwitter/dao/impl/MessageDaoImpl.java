@@ -12,17 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Transactional
-public class MessageDaoImpl extends AbstractDao implements MessageDao {
-    @Override
-    public Long saveMessage(Message message) {
-        return (Long) getSession().save(message);
-    }
-
-    @Override
-    public Message getMessageById(Long messageId) {
-        Query query = getSession().createQuery("select m from Message m where m.id like :id").setLong("id", messageId);
-        return (Message) query.uniqueResult();
-    }
+public class MessageDaoImpl extends GenericDaoImpl<Message, Long> implements MessageDao {
 
     @Override
     public Message getMessagesFromUser(Long personId) {

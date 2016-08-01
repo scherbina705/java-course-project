@@ -9,12 +9,10 @@ import java.util.List;
  *
  * @author Shcherbina A.
  */
-public interface PostDao {
-    Post getPostById(Long postId);
+public interface PostDao extends GenericDao<Post, Long> {
 
     List<Post> getLatestPosts(Integer postsNumber);
 
     List<Post> getPostsForPerson(Long personId);
 
-    Long savePost(Post post);
 }
