@@ -33,6 +33,7 @@ public class PersonDaoTest {
 
     public static final Hobby hobby1 = new Hobby("title1", "desc1");
     public static final Hobby hobby2 = new Hobby("title2", "desc2");
+    private static final String EMAIL = "email@email.com";
 
     private static Person testPerson;
 
@@ -46,6 +47,7 @@ public class PersonDaoTest {
         testPerson.setFirstName(FIRST_NAME);
         testPerson.setLastName(LAST_NAME);
         testPerson.setLogin(LOGIN);
+        testPerson.setEmail(EMAIL);
     }
 
     @Test
@@ -65,6 +67,7 @@ public class PersonDaoTest {
         assertThat(savedPerson.getFirstName()).isEqualTo(FIRST_NAME);
         assertThat(savedPerson.getLastName()).isEqualTo(LAST_NAME);
         assertThat(savedPerson.getLogin()).isEqualTo(LOGIN);
+        assertThat(savedPerson.getEmail()).isEqualTo(EMAIL);
         assertThat(savedPerson.getHobbies().size()).isEqualTo(2);
     }
 

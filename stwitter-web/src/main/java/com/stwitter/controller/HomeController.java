@@ -1,7 +1,7 @@
 package com.stwitter.controller;
 
-import com.stwitter.dto.Post;
-import com.stwitter.dto.User;
+import com.stwitter.dto.PersonDto;
+import com.stwitter.dto.PostDto;
 import com.stwitter.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,12 +40,12 @@ public class HomeController {
     @RequestMapping({"/getLatestStwitts"})
     public
     @ResponseBody
-    List<Post> getLatestStwitts() {
+    List<PostDto> getLatestStwitts() {
         return postService.getLatestPosts(POSTS_NUMBER);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegistration(@ModelAttribute("userForm") User user, Map<String, Object> model, HttpServletRequest request) {
+    public String processRegistration(@ModelAttribute("userForm") PersonDto user, Map<String, Object> model, HttpServletRequest request) {
         user.getEmail();
         return "home";
     }

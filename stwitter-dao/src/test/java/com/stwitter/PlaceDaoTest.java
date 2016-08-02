@@ -52,8 +52,8 @@ public class PlaceDaoTest {
         place.setPost(post);
         place.setTitle("adas");
         place.setDescription("adas");
-        place.setLatitude(12.34D);
-        place.setLongtitude(12.34D);
+        place.setLatitude(12.34F);
+        place.setLongtitude(12.34F);
         placeDao.save(place);
 
         //WHEN

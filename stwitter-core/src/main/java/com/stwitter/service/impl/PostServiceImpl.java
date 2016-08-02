@@ -1,7 +1,7 @@
 package com.stwitter.service.impl;
 
-import com.stwitter.dto.Post;
-import com.stwitter.dto.User;
+import com.stwitter.dto.PersonDto;
+import com.stwitter.dto.PostDto;
 import com.stwitter.service.PostService;
 import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Service;
@@ -27,25 +27,25 @@ public class PostServiceImpl implements PostService {
 
     @Override
     //	mock
-    public List<Post> getLatestPosts(Integer postsNumber) {
-        Post post1 = new Post();
-        User user1 = new User();
-        user1.setNickName("Tom Johns");
-        post1.setAuthor(user1);
-        post1.setPostId(1L);
-        post1.setPostText("- Если дать человеку право на одно безнаказанное убийство в жизни, то наш мир станет идеальным.\n" +
+    public List<PostDto> getLatestPosts(Integer postsNumber) {
+        PostDto postDto1 = new PostDto();
+        PersonDto personDto1 = new PersonDto();
+        personDto1.setNickName("Tom Johns");
+        postDto1.setAuthorPersonId(personDto1.getId());
+        postDto1.setPostId(1L);
+        postDto1.setPostContent("- Если дать человеку право на одно безнаказанное убийство в жизни, то наш мир станет идеальным.\n" +
                 "- Но ты его, возможно, уже не увидишь.");
-        post1.setCreationDateTime(LocalDateTime.now().toDate().getTime());
+        postDto1.setCreationDateTime(LocalDateTime.now());
 
-        Post post2 = new Post();
-        User user2 = new User();
-        user2.setNickName("Peter Jackson");
-        post2.setAuthor(user2);
-        post2.setPostId(2L);
-        post2.setPostText("\"Сынок, бегом домой! Никуда твои друзья не денутся!\"- убеждали нас родители?\n" +
+        PostDto postDto2 = new PostDto();
+        PersonDto personDto2 = new PersonDto();
+        personDto2.setNickName("Peter Jackson");
+        postDto2.setAuthorPersonId(personDto2.getId());
+        postDto2.setPostId(2L);
+        postDto2.setPostContent("\"Сынок, бегом домой! Никуда твои друзья не денутся!\"- убеждали нас родители?\n" +
                 "Прошло время и где же теперь друзья то?");
-        post2.setCreationDateTime(LocalDateTime.now().toDate().getTime());
+        postDto2.setCreationDateTime(LocalDateTime.now());
 
-        return Arrays.asList(post1, post2);
+        return Arrays.asList(postDto1, postDto2);
     }
 }

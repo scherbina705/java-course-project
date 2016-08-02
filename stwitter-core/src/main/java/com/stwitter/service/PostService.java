@@ -1,6 +1,6 @@
 package com.stwitter.service;
 
-import com.stwitter.dto.Post;
+import com.stwitter.dto.PostDto;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ public interface PostService {
 
     void getAllLikesForPost();
 
-    List<Post> getLatestPosts(Integer postsNumber);
+    List<PostDto> getLatestPosts(Integer postsNumber);
 }

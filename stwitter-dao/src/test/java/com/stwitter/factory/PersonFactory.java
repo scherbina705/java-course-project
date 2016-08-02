@@ -17,6 +17,7 @@ public class PersonFactory {
         p.setFirstName("Ivan" + counter);
         p.setLastName("Ivanenko" + counter);
         p.setLogin("ivan" + counter + "000");
+        p.setEmail("email@em.com" + counter);
         counter++;
         return p;
     }

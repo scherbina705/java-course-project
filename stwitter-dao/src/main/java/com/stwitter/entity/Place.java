@@ -14,15 +14,17 @@ public class Place {
     @Column(name = "PLACE_ID")
     private Long id;
 
+    @Column(nullable = true)
     private String title;
 
+    @Column(nullable = true)
     private String description;
 
     //TODO: Find out in which format to store
-    private Double latitude;
+    private Float latitude;
 
     //TODO: Find out in which format to store
-    private Double longtitude;
+    private Float longtitude;
 
     @ManyToOne
     @MapsId
@@ -67,19 +69,19 @@ public class Place {
         this.description = description;
     }
 
-    public Double getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongtitude() {
+    public Float getLongtitude() {
         return longtitude;
     }
 
-    public void setLongtitude(Double longtitude) {
+    public void setLongtitude(Float longtitude) {
         this.longtitude = longtitude;
     }
 

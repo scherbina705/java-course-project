@@ -25,6 +25,9 @@ public class Person {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "EMAIL")
+    private String email;
+
     @Column(name = "LOGIN")
     @NaturalId
     private String login;
@@ -32,9 +35,9 @@ public class Person {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Hobby> hobbies = new HashSet<>();
 
-
     @Temporal(TemporalType.DATE)
     private Date birthday;
+
 
     public Person() {
 
@@ -98,5 +101,13 @@ public class Person {
     @Override
     public int hashCode() {
         return login.hashCode();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
