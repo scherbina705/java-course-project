@@ -61,12 +61,12 @@ public class Hobby {
 
         Hobby hobby = (Hobby) o;
 
-        return title.equals(hobby.title);
+        return getTitle().equals(hobby.getTitle());
 
     }
 
     @Override
     public int hashCode() {
-        return title.hashCode();
+        return getTitle().hashCode();
     }
 }

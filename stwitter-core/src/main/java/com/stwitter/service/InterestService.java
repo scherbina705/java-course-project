@@ -1,15 +1,22 @@
 package com.stwitter.service;
 
+import java.util.Set;
+
+import com.stwitter.dto.HobbyDto;
+import com.stwitter.dto.PersonDto;
+import com.stwitter.dto.PlaceDto;
+
+
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
  */
 public interface InterestService {
-    void addPlace();
+	Long addPlace(PlaceDto placeDto);
 
-    void addHobby();
+	Long addHobby(HobbyDto hobbyDto);
 
-    void getPeopleWithHobby();
+	Set<PersonDto> getPeopleWithHobby(String title);
 
-    void getPeopleFromPlace();
+	Set<PersonDto> getPeopleFromPlace();
 }

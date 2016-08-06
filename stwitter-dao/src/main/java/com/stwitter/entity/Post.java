@@ -3,6 +3,9 @@ package com.stwitter.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
@@ -24,6 +27,7 @@ public class Post {
 
     @ManyToOne
     @MapsId
+
     @JoinColumn(name = "PERSON_ID",
             foreignKey = @ForeignKey(name = "FK_POST_PERSON")
     )
@@ -75,18 +79,32 @@ public class Post {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Post post = (Post) o;
 
-        return id.equals(post.id);
-
+        return new EqualsBuilder()
+                .append(getTitle(), post.getTitle())
+                .append(getContent(), post.getContent())
+                .append(getPlaceTime(), post.getPlaceTime())
+                .append(getPerson(), post.getPerson())
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return new HashCodeBuilder(17, 37)
+                .append(getTitle())
+                .append(getContent())
+                .append(getPlaceTime())
+                .append(getPerson())
+                .toHashCode();
     }
 
 }

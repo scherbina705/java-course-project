@@ -1,5 +1,7 @@
 package com.stwitter.dao;
 
+import java.util.List;
+
 import com.stwitter.entity.Hobby;
 
 /**
@@ -8,5 +10,5 @@ import com.stwitter.entity.Hobby;
  * @author Shcherbina A.
  */
 public interface HobbyDao extends GenericDao<Hobby, Long> {
-
+	List<Hobby> findHobbyByTitle(String title);
 }

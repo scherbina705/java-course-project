@@ -2,7 +2,8 @@ package com.stwitter;
 
 import com.stwitter.dao.HobbyDao;
 import com.stwitter.entity.Hobby;
-import com.stwitter.factory.HobbyFactory;
+import com.stwitter.util.TestUtils;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/spring/test-context.xml")
-public class HobbyDaoTest {
+public class HobbyDaoImplTest {
 
     @Autowired
     private HobbyDao hobbyDao;
@@ -39,14 +40,14 @@ public class HobbyDaoTest {
     @Rollback(true)
     public void saveHobbyTest() {
         //GIVEN
-        Hobby testHobby1 = HobbyFactory.getHobby();
+        Hobby testHobby1 = TestUtils.getHobby();
 
         //WHEN
         hobbyDao.save(testHobby1);
 
         //THEN
-        assertThat(hobbyDao.findAll(Hobby.class).size()).isEqualTo(1);
-        Hobby savedHobby = hobbyDao.findAll(Hobby.class).get(0);
+        assertThat(hobbyDao.findAll().size()).isEqualTo(1);
+        Hobby savedHobby = hobbyDao.findAll().get(0);
         assertThat(savedHobby.getTitle()).isEqualTo(testHobby1.getTitle());
         assertThat(savedHobby.getDescription()).isEqualTo(testHobby1.getDescription());
     }
@@ -56,19 +57,19 @@ public class HobbyDaoTest {
     @Rollback(true)
     public void findAllHobbiesTest() {
         //GIVEN
-        Hobby testHobby1 = HobbyFactory.getHobby();
-        Hobby testHobby2 = HobbyFactory.getHobby();
+        Hobby testHobby1 = TestUtils.getHobby();
+        Hobby testHobby2 = TestUtils.getHobby();
 
         //WHEN
         hobbyDao.save(testHobby1);
         hobbyDao.save(testHobby2);
 
         //THEN
-        assertThat(hobbyDao.findAll(Hobby.class).size()).isEqualTo(2);
-        Hobby savedHobby = hobbyDao.findAll(Hobby.class).get(0);
+        assertThat(hobbyDao.findAll().size()).isEqualTo(2);
+        Hobby savedHobby = hobbyDao.findAll().get(0);
         assertThat(savedHobby.getTitle()).isEqualTo(testHobby1.getTitle());
         assertThat(savedHobby.getDescription()).isEqualTo(testHobby1.getDescription());
-        Hobby savedHobby2 = hobbyDao.findAll(Hobby.class).get(1);
+        Hobby savedHobby2 = hobbyDao.findAll().get(1);
         assertThat(savedHobby2.getTitle()).isEqualTo(testHobby2.getTitle());
         assertThat(savedHobby2.getDescription()).isEqualTo(testHobby2.getDescription());
     }
@@ -79,7 +80,7 @@ public class HobbyDaoTest {
     public void uopdateHobbyTest() {
         //GIVEN
         String changedDescription = "Another Description";
-        Hobby testHobby1 = HobbyFactory.getHobby();
+        Hobby testHobby1 = TestUtils.getHobby();
         hobbyDao.save(testHobby1);
 
         //WHEN
@@ -87,8 +88,8 @@ public class HobbyDaoTest {
         hobbyDao.update(testHobby1);
 
         //THEN
-        assertThat(hobbyDao.findAll(Hobby.class).size()).isEqualTo(1);
-        Hobby savedHobby = hobbyDao.findAll(Hobby.class).get(0);
+        assertThat(hobbyDao.findAll().size()).isEqualTo(1);
+        Hobby savedHobby = hobbyDao.findAll().get(0);
         assertThat(savedHobby.getTitle()).isEqualTo(testHobby1.getTitle());
         assertThat(savedHobby.getDescription()).isEqualTo(changedDescription);
     }
@@ -99,14 +100,14 @@ public class HobbyDaoTest {
     public void deleteHobbyTest() {
         //GIVEN
         String changedDescription = "Another Description";
-        Hobby testHobby1 = HobbyFactory.getHobby();
+        Hobby testHobby1 = TestUtils.getHobby();
         hobbyDao.save(testHobby1);
 
         //WHEN
         hobbyDao.delete(testHobby1);
 
         //THEN
-        assertTrue(hobbyDao.findAll(Hobby.class).isEmpty());
+        assertTrue(hobbyDao.findAll().isEmpty());
     }
 
 }

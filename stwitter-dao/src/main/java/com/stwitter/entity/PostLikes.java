@@ -51,14 +51,6 @@ public class PostLikes implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(person)
-                .append(post)
-                .toHashCode();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -71,8 +63,16 @@ public class PostLikes implements Serializable {
         PostLikes postLikes = (PostLikes) o;
 
         return new EqualsBuilder()
-                .append(person, postLikes.person)
-                .append(post, postLikes.post)
+                .append(getPost(), postLikes.getPost())
+                .append(getPerson(), postLikes.getPerson())
                 .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getPost())
+                .append(getPerson())
+                .toHashCode();
     }
 }

@@ -1,13 +1,15 @@
 package com.stwitter.service;
 
+import com.stwitter.dto.PersonDto;
+
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
  */
 public interface PersonService {
-    void createPerson();
+	Long savePerson(PersonDto person);
 
-    void removePerson();
+	void removePerson(Long personId);
 
-    void addFriendship();
+	void addFriendship(Long personId, Long friendId);
 }

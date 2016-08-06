@@ -14,6 +14,7 @@
 
     <properties>
         <stwitter-dao.version>1.0-SNAPSHOT</stwitter-dao.version>
+        <dozer.version>5.4.0</dozer.version>
     </properties>
 
     <dependencies>
@@ -21,6 +22,11 @@
             <groupId>com.stwitter</groupId>
             <artifactId>stwitter-dao</artifactId>
             <version>${stwitter-dao.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>${dozer.version}</version>
         </dependency>
     </dependencies>
 

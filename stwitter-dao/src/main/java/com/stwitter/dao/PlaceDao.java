@@ -1,5 +1,7 @@
 package com.stwitter.dao;
 
+import java.util.Set;
+
 import com.stwitter.entity.Place;
 
 /**
@@ -9,5 +11,5 @@ import com.stwitter.entity.Place;
  */
 public interface PlaceDao extends GenericDao<Place, Long> {
 
-    Place findPlaceForPost(Long postId);
+    Place findPlaceForPerson(Long personId);
 }

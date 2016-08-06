@@ -9,81 +9,92 @@ import org.joda.time.LocalDateTime;
  * on 24.07.2016.
  */
 public class PostDto {
-    private LocalDateTime creationDateTime;
-    private Long postId;
-    private String postContent;
-    private String postTitle;
-    private Long authorPersonId;
+	private Long id;
+	private String title;
+	private String content;
+	private LocalDateTime placeTime;
+	private PersonDto person;
+	private PlaceDto place;
 
-    public LocalDateTime getCreationDateTime() {
-        return creationDateTime;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setCreationDateTime(LocalDateTime creationDateTime) {
-        this.creationDateTime = creationDateTime;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public Long getPostId() {
-        return postId;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getPostContent() {
-        return postContent;
-    }
+	public PersonDto getPerson() {
+		return person;
+	}
 
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
-    }
+	public void setPerson(PersonDto person) {
+		this.person = person;
+	}
 
-    public Long getAuthorPersonId() {
-        return authorPersonId;
-    }
+	public PlaceDto getPlace() {
+		return place;
+	}
 
-    public void setAuthorPersonId(Long authorPersonId) {
-        this.authorPersonId = authorPersonId;
-    }
+	public void setPlace(PlaceDto place) {
+		this.place = place;
+	}
 
-    public String getPostTitle() {
-        return postTitle;
-    }
+	public LocalDateTime getPlaceTime() {
+		return placeTime;
+	}
 
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
+	public void setPlaceTime(LocalDateTime placeTime) {
+		this.placeTime = placeTime;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
+	public String getTitle() {
+		return title;
+	}
 
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-        PostDto postDto = (PostDto) o;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
 
-        return new EqualsBuilder()
-                .append(creationDateTime, postDto.creationDateTime)
-                .append(postId, postDto.postId)
-                .append(postContent, postDto.postContent)
-                .append(postTitle, postDto.postTitle)
-                .append(authorPersonId, postDto.authorPersonId)
-                .isEquals();
-    }
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(creationDateTime)
-                .append(postId)
-                .append(postContent)
-                .append(postTitle)
-                .append(authorPersonId)
-                .toHashCode();
-    }
+		PostDto postDto = (PostDto) o;
+
+		return new EqualsBuilder()
+				.append(id, postDto.id)
+				.append(title, postDto.title)
+				.append(content, postDto.content)
+				.append(placeTime, postDto.placeTime)
+				.append(person, postDto.person)
+				.append(place, postDto.place)
+				.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 37)
+				.append(id)
+				.append(title)
+				.append(content)
+				.append(placeTime)
+				.append(person)
+				.append(place)
+				.toHashCode();
+	}
 }

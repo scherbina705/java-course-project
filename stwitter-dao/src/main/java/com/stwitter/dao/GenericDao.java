@@ -8,13 +8,14 @@ import java.util.List;
  * on 31.07.2016.
  */
 public interface GenericDao<T, PK extends Serializable> {
-    T findById(PK id, Class<T> entityClass);
+    T findById(PK id);
 
-    List<T> findAll(Class<T> entityClass);
+    List<T> findAll();
 
     PK save(T value);
 
     void update(T value);
 
     void delete(T value);
+    
 }

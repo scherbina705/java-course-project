@@ -1,120 +1,126 @@
 package com.stwitter.dto;
 
-import com.stwitter.entity.Hobby;
-import com.stwitter.entity.Person;
-
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.joda.time.LocalDate;
 
 /**
  * Created by A.Shcherbina
  * on 24.07.2016.
  */
 public class PersonDto {
-    private String nickName;
-    private Long id;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private Set<HobbyDto> hobbies;
+	private Long id;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String login;
+	private String password;
+	private LocalDate birthday;
+	private Set<HobbyDto> hobbies = new HashSet<>();
 
-    public static PersonDto convertToDto(Person entity) {
-        PersonDto p = new PersonDto();
-        p.setLastName(entity.getLastName());
-        p.setEmail(entity.getEmail());
-        p.setFirstName(entity.getFirstName());
-        for (Hobby hobby : entity.getHobbies()) {
-            p.getHobbies().add(HobbyDto.convertToDto(hobby));
-        }
-        p.setNickName(entity.getLogin());
-        p.setId(entity.getId());
-        return p;
-    }
+	public LocalDate getBirthday() {
+		return birthday;
+	}
 
-    public static Person convertToEntity(PersonDto dto) {
-        Person p = new Person();
-        p.setLastName(dto.getLastName());
-        p.setEmail(dto.getEmail());
-        p.setFirstName(dto.getFirstName());
-        for (HobbyDto hobby : dto.getHobbies()) {
-            p.getHobbies().add(HobbyDto.convertToEntity(hobby));
-        }
-        p.setLogin(dto.getNickName());
-        p.setId(dto.getId());
-        return p;
-    }
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public Set<HobbyDto> getHobbies() {
+		return hobbies;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setHobbies(Set<HobbyDto> hobbies) {
+		this.hobbies = hobbies;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Set<HobbyDto> getHobbies() {
-        return hobbies;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setHobbies(Set<HobbyDto> hobbies) {
-        this.hobbies = hobbies;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getNickName() {
-        return nickName;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public String getPassword() {
+		return password;
+	}
 
-        PersonDto personDto = (PersonDto) o;
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-        if (!nickName.equals(personDto.nickName)) return false;
-        if (id != null ? !id.equals(personDto.id) : personDto.id != null) return false;
-        if (!email.equals(personDto.email)) return false;
-        if (!firstName.equals(personDto.firstName)) return false;
-        if (!lastName.equals(personDto.lastName)) return false;
-        return hobbies.equals(personDto.hobbies);
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
 
-    }
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        int result = nickName.hashCode();
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + email.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + hobbies.hashCode();
-        return result;
-    }
+		PersonDto personDto = (PersonDto) o;
+
+		return new EqualsBuilder()
+				.append(id, personDto.id)
+				.append(firstName, personDto.firstName)
+				.append(lastName, personDto.lastName)
+				.append(email, personDto.email)
+				.append(login, personDto.login)
+				.append(password, personDto.password)
+				.append(birthday, personDto.birthday)
+				.append(hobbies, personDto.hobbies)
+				.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 37)
+				.append(id)
+				.append(firstName)
+				.append(lastName)
+				.append(email)
+				.append(login)
+				.append(password)
+				.append(birthday)
+				.append(hobbies)
+				.toHashCode();
+	}
 }

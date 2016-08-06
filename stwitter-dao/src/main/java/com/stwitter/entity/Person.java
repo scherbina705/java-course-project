@@ -32,12 +32,14 @@ public class Person {
     @NaturalId
     private String login;
 
+    @Column(name = "PASSWORD")
+    private String password;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Hobby> hobbies = new HashSet<>();
 
     @Temporal(TemporalType.DATE)
     private Date birthday;
-
 
     public Person() {
 
@@ -47,20 +49,34 @@ public class Person {
         return login;
     }
 
+
     public void setLogin(String login) {
         this.login = login;
     }
 
-    public Set<Hobby> getHobbies() {
-        return hobbies;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {
         return id;
     }
 
+
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(Set<Hobby> hobbies) {
+        this.hobbies = hobbies;
     }
 
     public String getFirstName() {
@@ -94,13 +110,13 @@ public class Person {
 
         Person person = (Person) o;
 
-        return login.equals(person.login);
+        return getLogin().equals(person.getLogin());
 
     }
 
     @Override
     public int hashCode() {
-        return login.hashCode();
+        return getLogin().hashCode();
     }
 
     public String getEmail() {

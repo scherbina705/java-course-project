@@ -4,7 +4,8 @@ import com.stwitter.dao.PersonDao;
 import com.stwitter.dao.PostDao;
 import com.stwitter.entity.Person;
 import com.stwitter.entity.Post;
-import com.stwitter.factory.PersonFactory;
+import com.stwitter.util.TestUtils;
+
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/spring/test-context.xml")
-public class PostDaoTest {
+public class PostDaoImplTest {
     private static int counter = 1;
 
     @Autowired
@@ -50,12 +51,7 @@ public class PostDaoTest {
 
         //THEN
         assertThat(posts.size()).isEqualTo(expectedPostNumber);
-        assertThat(posts).isSortedAccordingTo(new Comparator<Post>() {
-            @Override
-            public int compare(Post p1, Post p2) {
-                return p2.getPlaceTime().compareTo(p1.getPlaceTime());
-            }
-        });
+        assertThat(posts).isSortedAccordingTo((Post p1, Post p2) ->  p2.getPlaceTime().compareTo(p1.getPlaceTime()));
     }
 
     @Test
@@ -67,7 +63,7 @@ public class PostDaoTest {
         postDao.save(getPost());
 
         //WHEN
-        Person p = postDao.findAll(Post.class).get(0).getPerson();
+        Person p = postDao.findAll().get(0).getPerson();
         List<Post> posts = postDao.findPostsFromPerson(p.getId());
 
         //THEN
@@ -77,7 +73,7 @@ public class PostDaoTest {
     private Post getPost() {
         Post p = new Post();
         p.setContent("content" + counter);
-        Person person = PersonFactory.getPerson();
+        Person person = TestUtils.getPerson();
         personDao.save(person);
         p.setPerson(person);
         p.setPlaceTime(LocalDateTime.now().toDate());

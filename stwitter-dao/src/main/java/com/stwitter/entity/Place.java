@@ -2,6 +2,9 @@ package com.stwitter.entity;
 
 import javax.persistence.*;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
@@ -20,18 +23,15 @@ public class Place {
     @Column(nullable = true)
     private String description;
 
-    //TODO: Find out in which format to store
     private Float latitude;
 
-    //TODO: Find out in which format to store
     private Float longtitude;
 
-    @ManyToOne
-    @MapsId
-    @JoinColumn(name = "POST_ID",
-            foreignKey = @ForeignKey(name = "FK_PLACE_POST")
+    @OneToOne
+    @JoinColumn(name = "PERSON_ID",
+            foreignKey = @ForeignKey(name = "FK_PLACE_PERSON")
     )
-    private Post post;
+    private Person person;
 
     public Place() {
 
@@ -45,12 +45,12 @@ public class Place {
         this.id = id;
     }
 
-    public Post getPost() {
-        return post;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getTitle() {
@@ -87,17 +87,25 @@ public class Place {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Place place = (Place) o;
 
-        return id.equals(place.id);
-
+        return new EqualsBuilder()
+                .append(getPerson(), place.getPerson())
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return new HashCodeBuilder(17, 37)
+                .append(getPerson())
+                .toHashCode();
     }
 }

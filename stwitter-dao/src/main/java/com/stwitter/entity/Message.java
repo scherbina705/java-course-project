@@ -3,6 +3,8 @@ package com.stwitter.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Created by A.Shcherbina
@@ -16,6 +18,7 @@ public class Message {
     @Column(name = "MESSAGE_ID")
     private Long id;
 
+    @Column(name = "CONTENT")
     private String content;
 
     @Column(name = "TIME_SENT")
@@ -33,22 +36,6 @@ public class Message {
             foreignKey = @ForeignKey(name = "FK2_MESSAGE_PERSON")
     )
     private Person personTo;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Message message = (Message) o;
-
-        return id.equals(message.id);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 
     public Long getId() {
         return id;
@@ -88,5 +75,35 @@ public class Message {
 
     public void setPersonTo(Person personTo) {
         this.personTo = personTo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Message message = (Message) o;
+
+        return new EqualsBuilder()
+                .append(getContent(), message.getContent())
+                .append(getTimeSent(), message.getTimeSent())
+                .append(getPersonFrom(), message.getPersonFrom())
+                .append(getPersonTo(), message.getPersonTo())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getContent())
+                .append(getTimeSent())
+                .append(getPersonFrom())
+                .append(getPersonTo())
+                .toHashCode();
     }
 }

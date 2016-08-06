@@ -17,7 +17,6 @@ import java.util.Date;
 @Table(name = "FRIENDSHIP")
 public class Friendship implements Serializable {
     @Id
-    @MapsId
     @ManyToOne
     @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "FK1_FRIENDSHIP_PERSON")
@@ -25,49 +24,18 @@ public class Friendship implements Serializable {
     private Person person;
 
     @Id
-    @MapsId
     @ManyToOne
     @JoinColumn(name = "FRIEND_ID", insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "FK2_FRIENDSHIP_PERSON")
     )
     private Person friend;
+
     @Column(name = "DATE_FROM")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateFrom;
 
     public Friendship() {
-    }
 
-    public Friendship(Date dateFrom, Person friend, Person person) {
-        this.dateFrom = dateFrom;
-        this.friend = friend;
-        this.person = person;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Friendship that = (Friendship) o;
-
-        return new EqualsBuilder()
-                .append(person, that.person)
-                .append(friend, that.friend)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(person)
-                .append(friend)
-                .toHashCode();
     }
 
     public Person getFriend() {
@@ -92,5 +60,33 @@ public class Friendship implements Serializable {
 
     public void setDateFrom(Date dateFrom) {
         this.dateFrom = dateFrom;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Friendship that = (Friendship) o;
+
+        return new EqualsBuilder()
+                .append(getPerson(), that.getPerson())
+                .append(getFriend(), that.getFriend())
+                .append(getDateFrom(), that.getDateFrom())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getPerson())
+                .append(getFriend())
+                .append(getDateFrom())
+                .toHashCode();
     }
 }

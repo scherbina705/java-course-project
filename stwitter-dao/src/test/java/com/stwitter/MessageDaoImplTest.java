@@ -4,7 +4,8 @@ import com.stwitter.dao.MessageDao;
 import com.stwitter.dao.PersonDao;
 import com.stwitter.entity.Message;
 import com.stwitter.entity.Person;
-import com.stwitter.factory.PersonFactory;
+import com.stwitter.util.TestUtils;
+
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/spring/test-context.xml")
-public class MessageDaoTest {
+public class MessageDaoImplTest {
     @Autowired
     private PersonDao personDao;
 
@@ -36,8 +37,8 @@ public class MessageDaoTest {
     @Rollback(true)
     public void testFindMessageFromUser() {
         //GIVEN
-        Person personTo = PersonFactory.getPerson();
-        Person personFrom = PersonFactory.getPerson();
+        Person personTo = TestUtils.getPerson();
+        Person personFrom = TestUtils.getPerson();
         personDao.save(personTo);
         personDao.save(personFrom);
         Message message = new Message();
@@ -66,8 +67,8 @@ public class MessageDaoTest {
     @Rollback(true)
     public void testFindMessageToUser() {
         //GIVEN
-        Person personTo = PersonFactory.getPerson();
-        Person personFrom = PersonFactory.getPerson();
+        Person personTo = TestUtils.getPerson();
+        Person personFrom = TestUtils.getPerson();
         personDao.save(personTo);
         personDao.save(personFrom);
         Message message = new Message();
