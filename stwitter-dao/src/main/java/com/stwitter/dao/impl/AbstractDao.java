@@ -18,35 +18,32 @@ import java.util.List;
  */
 @Component
 @Transactional
-public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
+public abstract class AbstractDao<T, PK extends Serializable>{
 
     @Autowired
     protected SessionFactory sessionFactory;
 
-    @Override
+
     public T findById(PK id, Class<T> entityClass) {
         Query query = getSession().createQuery("select t from " + entityClass.getSimpleName() + " t where t.id like :id").setParameter("id", id);
         return (T) query.uniqueResult();
-
     }
 
-    @Override
+
     public List<T> findAll(Class<T> entityClass) {
         Query query = getSession().createQuery("select t from " + entityClass.getSimpleName() + " t");
         return query.list();
     }
 
-    @Override
+
     public PK save(T value) {
         return (PK) getSession().save(value);
     }
 
-    @Override
     public void update(T value) {
         getSession().update(value);
     }
 
-    @Override
     public void delete(T value) {
         getSession().delete(value);
     }

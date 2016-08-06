@@ -1,5 +1,9 @@
 package com.stwitter.dao.impl;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.stwitter.dao.PlaceDao;
 import com.stwitter.entity.Place;
 import org.hibernate.Query;
@@ -12,12 +16,21 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Transactional
-public class PlaceDaoImpl extends GenericDaoImpl<Place, Long> implements PlaceDao {
+public class PlaceDaoImpl extends AbstractDao<Place, Long> implements PlaceDao {
 
     @Override
-    public Place findPlaceForPost(Long postId) {
-        Query query = getSession().createQuery("from Place p where p.post.id like :id").setLong("id", postId);
+    public Place findPlaceForPerson(Long personId) {
+        Query query = getSession().createQuery("from Place p where p.person.id = :id").setLong("id", personId);
         return (Place) query.uniqueResult();
     }
 
+    @Override
+    public Place findById(Long id) {
+        return findById(id, Place.class);
+    }
+
+    @Override
+    public List<Place> findAll() {
+        return findAll(Place.class);
+    }
 }

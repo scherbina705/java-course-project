@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Component
 @Transactional
-public class MessageDaoImpl extends GenericDaoImpl<Message, Long> implements MessageDao {
+public class MessageDaoImpl extends AbstractDao<Message, Long> implements MessageDao {
 
     @Override
     public List<Message> findMessagesFromUser(Long personId) {
@@ -26,5 +26,15 @@ public class MessageDaoImpl extends GenericDaoImpl<Message, Long> implements Mes
     public List<Message> findMessagesToUser(Long personId) {
         Query query = getSession().createQuery("from Message m where m.personTo.id = :personId").setParameter("personId", personId);
         return query.list();
+    }
+
+    @Override
+    public Message findById(Long id) {
+        return findById(id, Message.class);
+    }
+
+    @Override
+    public List<Message> findAll() {
+        return findAll(Message.class);
     }
 }

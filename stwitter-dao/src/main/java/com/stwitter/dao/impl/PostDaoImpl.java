@@ -14,7 +14,17 @@ import java.util.List;
  */
 @Component
 @Transactional
-public class PostDaoImpl extends GenericDaoImpl<Post, Long> implements PostDao {
+public class PostDaoImpl extends AbstractDao<Post, Long> implements PostDao {
+
+    @Override
+    public List<Post> findAll() {
+        return findAll(Post.class);
+    }
+
+    @Override
+    public Post findById(Long id) {
+        return findById(id, Post.class);
+    }
 
     @Override
     public List<Post> findLatestPosts(Integer postsNumber) {
