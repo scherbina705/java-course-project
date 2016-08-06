@@ -1,18 +1,16 @@
 package stwitter.converter;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import com.stwitter.dto.PostDto;
+import com.stwitter.entity.Post;
 import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import stwitter.util.TestConverterUtils;
 
-import com.stwitter.dto.PostDto;
-import com.stwitter.entity.Post;
-
-import stwitter.util.TestUtils;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * (c) Swissquote 8/5/16
@@ -22,33 +20,33 @@ import stwitter.util.TestUtils;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/test-context.xml")
 public class PostDozerMappingTest {
-	@Autowired
-	private DozerBeanMapper mapper;
+    @Autowired
+    private DozerBeanMapper mapper;
 
-	@Test
-	public void testPostEntityToDtoMapping() {
-		//GIVEN
-		Post entity = TestUtils.getPost();
-		PostDto expectedDto = TestUtils.getPostDto();
+    @Test
+    public void testPostEntityToDtoMapping() {
+        //GIVEN
+        Post entity = TestConverterUtils.getPost();
+        PostDto expectedDto = TestConverterUtils.getPostDto();
 
-		//WHEN
-		PostDto actualDto = mapper.map(entity, PostDto.class);
+        //WHEN
+        PostDto actualDto = mapper.map(entity, PostDto.class);
 
-		//THEN
-		assertThat(actualDto.getId()).isEqualTo(expectedDto.getId());
-	}
+        //THEN
+        assertThat(actualDto.getId()).isEqualTo(expectedDto.getId());
+    }
 
-	@Test
-	public void testPostDtoToEntityMapping() {
-		//GIVEN
-		PostDto dto = TestUtils.getPostDto();
-		Post expectedEntity = TestUtils.getPost();
+    @Test
+    public void testPostDtoToEntityMapping() {
+        //GIVEN
+        PostDto dto = TestConverterUtils.getPostDto();
+        Post expectedEntity = TestConverterUtils.getPost();
 
-		//WHEN
-		Post actualEntity = mapper.map(dto, Post.class);
+        //WHEN
+        Post actualEntity = mapper.map(dto, Post.class);
 
-		//THEN
-		assertThat(actualEntity.getId()).isEqualTo(expectedEntity.getId());
-	}
+        //THEN
+        assertThat(actualEntity.getId()).isEqualTo(expectedEntity.getId());
+    }
 
 }

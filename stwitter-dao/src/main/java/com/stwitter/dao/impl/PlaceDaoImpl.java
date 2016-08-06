@@ -1,14 +1,13 @@
 package com.stwitter.dao.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.stwitter.dao.PlaceDao;
+import com.stwitter.entity.Person;
 import com.stwitter.entity.Place;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by A.Shcherbina
@@ -19,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlaceDaoImpl extends AbstractDao<Place, Long> implements PlaceDao {
 
     @Override
-    public Place findPlaceForPerson(Long personId) {
-        Query query = getSession().createQuery("from Place p where p.person.id = :id").setLong("id", personId);
+    public Place findPlaceForPerson(Person person) {
+        Query query = getSession().createQuery("from Place p where :person in elements(p.persons)").setParameter("person", person);
         return (Place) query.uniqueResult();
     }
 

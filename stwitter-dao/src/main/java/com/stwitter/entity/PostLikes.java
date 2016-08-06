@@ -14,8 +14,8 @@ import java.io.Serializable;
 @Table(name = "POST_LIKES")
 public class PostLikes implements Serializable {
 
+    @Id
     @ManyToOne
-    @MapsId
     @JoinColumn(name = "POST_ID", insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "FK_POST_LIKES_POST")
     )
@@ -23,7 +23,6 @@ public class PostLikes implements Serializable {
 
     @Id
     @ManyToOne
-    @MapsId
     @JoinColumn(name = "PERSON_ID", insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "FK_POST_LIKES_PERSON")
     )
@@ -32,6 +31,9 @@ public class PostLikes implements Serializable {
     public PostLikes(Person person, Post post) {
         this.person = person;
         this.post = post;
+    }
+
+    public PostLikes() {
     }
 
     public Post getPost() {

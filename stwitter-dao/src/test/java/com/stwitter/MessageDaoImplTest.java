@@ -1,11 +1,9 @@
 package com.stwitter;
 
 import com.stwitter.dao.MessageDao;
-import com.stwitter.dao.PersonDao;
 import com.stwitter.entity.Message;
 import com.stwitter.entity.Person;
 import com.stwitter.util.TestUtils;
-
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,9 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/spring/test-context.xml")
-public class MessageDaoImplTest {
-    @Autowired
-    private PersonDao personDao;
+public class MessageDaoImplTest extends TestAbstractDao {
 
     @Autowired
     private MessageDao messageDao;
@@ -39,8 +35,8 @@ public class MessageDaoImplTest {
         //GIVEN
         Person personTo = TestUtils.getPerson();
         Person personFrom = TestUtils.getPerson();
-        personDao.save(personTo);
-        personDao.save(personFrom);
+        getSession().save(personTo);
+        getSession().save(personFrom);
         Message message = new Message();
         message.setContent("abc1");
         message.setPersonTo(personTo);
@@ -48,7 +44,7 @@ public class MessageDaoImplTest {
         message.setTimeSent(LocalDateTime.now().toDate());
 
         Message message2 = new Message();
-        message2.setContent("abc1");
+        message2.setContent("abc2");
         message2.setPersonTo(personTo);
         message2.setPersonFrom(personFrom);
         message2.setTimeSent(LocalDateTime.now().toDate());
@@ -58,7 +54,7 @@ public class MessageDaoImplTest {
         messageDao.save(message2);
 
         //THEN
-        List<Message> foundMessages = messageDao.findMessagesFromUser(personFrom.getId());
+        Set<Message> foundMessages = messageDao.findMessagesFromUser(personFrom.getId());
         assertThat(foundMessages.size()).isEqualTo(2);
     }
 
@@ -69,8 +65,8 @@ public class MessageDaoImplTest {
         //GIVEN
         Person personTo = TestUtils.getPerson();
         Person personFrom = TestUtils.getPerson();
-        personDao.save(personTo);
-        personDao.save(personFrom);
+        getSession().save(personTo);
+        getSession().save(personFrom);
         Message message = new Message();
         message.setContent("abc1");
         message.setPersonTo(personTo);
@@ -78,7 +74,7 @@ public class MessageDaoImplTest {
         message.setTimeSent(LocalDateTime.now().toDate());
 
         Message message2 = new Message();
-        message2.setContent("abc1");
+        message2.setContent("abc2");
         message2.setPersonTo(personTo);
         message2.setPersonFrom(personFrom);
         message2.setTimeSent(LocalDateTime.now().toDate());
@@ -88,7 +84,7 @@ public class MessageDaoImplTest {
         messageDao.save(message2);
 
         //THEN
-        List<Message> foundMessages = messageDao.findMessagesToUser(personTo.getId());
+        Set<Message> foundMessages = messageDao.findMessagesToUser(personTo.getId());
         assertThat(foundMessages.size()).isEqualTo(2);
     }
 }

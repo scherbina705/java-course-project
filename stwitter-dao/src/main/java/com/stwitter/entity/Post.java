@@ -1,10 +1,10 @@
 package com.stwitter.entity;
 
-import javax.persistence.*;
-import java.util.Date;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by A.Shcherbina
@@ -14,7 +14,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Table(name = "POST")
 public class Post {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_ID")
     private Long id;
 
@@ -26,16 +26,10 @@ public class Post {
     private Date placeTime;
 
     @ManyToOne
-    @MapsId
-
     @JoinColumn(name = "PERSON_ID",
             foreignKey = @ForeignKey(name = "FK_POST_PERSON")
     )
     private Person person;
-
-    @OneToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
 
     public Long getId() {
         return id;

@@ -7,9 +7,9 @@ import com.stwitter.dto.PersonDto;
  * on 10.07.2016.
  */
 public interface PersonService {
-	Long savePerson(PersonDto person);
+    Long savePerson(PersonDto person);
 
-	void removePerson(Long personId);
+    void removePerson(String personLogin);
 
-	void addFriendship(Long personId, Long friendId);
+    void addFriendship(String personLogin, String friendLogin);
 }

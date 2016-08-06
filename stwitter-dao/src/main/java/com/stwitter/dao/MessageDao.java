@@ -2,7 +2,7 @@ package com.stwitter.dao;
 
 import com.stwitter.entity.Message;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * (c) Swissquote 7/30/16
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface MessageDao extends GenericDao<Message, Long> {
 
-    List<Message> findMessagesFromUser(Long personId);
+    Set<Message> findMessagesFromUser(Long personId);
 
-    List<Message> findMessagesToUser(Long personId);
+    Set<Message> findMessagesToUser(Long personId);
 }

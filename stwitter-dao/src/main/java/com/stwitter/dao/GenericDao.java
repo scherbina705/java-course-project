@@ -1,6 +1,7 @@
 package com.stwitter.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public interface GenericDao<T, PK extends Serializable> {
 
     void update(T value);
 
-    void delete(T value);
-    
+    void deleteAll(T... values);
+
+    void deleteCollection(Collection<T> values);
 }

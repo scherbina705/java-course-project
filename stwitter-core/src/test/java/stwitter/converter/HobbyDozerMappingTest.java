@@ -1,18 +1,16 @@
 package stwitter.converter;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import com.stwitter.dto.HobbyDto;
+import com.stwitter.entity.Hobby;
 import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import stwitter.util.TestConverterUtils;
 
-import com.stwitter.dto.HobbyDto;
-import com.stwitter.entity.Hobby;
-
-import stwitter.util.TestUtils;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * (c) Swissquote 8/5/16
@@ -23,37 +21,37 @@ import stwitter.util.TestUtils;
 @ContextConfiguration(locations = "classpath:/test-context.xml")
 public class HobbyDozerMappingTest {
 
-	@Autowired
-	private DozerBeanMapper mapper;
+    @Autowired
+    private DozerBeanMapper mapper;
 
-	@Test
-	public void testHobbyDtoToEntityMapping() {
-		//GIVEN
-		HobbyDto dto = TestUtils.getHobbyDto();
-		Hobby expectedEntity = TestUtils.getHobby();
+    @Test
+    public void testHobbyDtoToEntityMapping() {
+        //GIVEN
+        HobbyDto dto = TestConverterUtils.getHobbyDto();
+        Hobby expectedEntity = TestConverterUtils.getHobby();
 
-		//WHEN
-		Hobby actualEntity = mapper.map(dto, Hobby.class);
+        //WHEN
+        Hobby actualEntity = mapper.map(dto, Hobby.class);
 
-		//THEN
-		assertThat(actualEntity.getId()).isEqualTo(expectedEntity.getId());
-		assertThat(actualEntity.getDescription()).isEqualTo(expectedEntity.getDescription());
-		assertThat(actualEntity.getTitle()).isEqualTo(expectedEntity.getTitle());
-	}
+        //THEN
+        assertThat(actualEntity.getId()).isEqualTo(expectedEntity.getId());
+        assertThat(actualEntity.getDescription()).isEqualTo(expectedEntity.getDescription());
+        assertThat(actualEntity.getTitle()).isEqualTo(expectedEntity.getTitle());
+    }
 
-	@Test
-	public void testHobbyEntityToDtoMapping() {
-		//GIVEN
-		HobbyDto expectedDto = TestUtils.getHobbyDto();
-		Hobby entity = TestUtils.getHobby();
+    @Test
+    public void testHobbyEntityToDtoMapping() {
+        //GIVEN
+        HobbyDto expectedDto = TestConverterUtils.getHobbyDto();
+        Hobby entity = TestConverterUtils.getHobby();
 
-		//WHEN
-		HobbyDto actualDto = mapper.map(entity, HobbyDto.class);
+        //WHEN
+        HobbyDto actualDto = mapper.map(entity, HobbyDto.class);
 
-		//THEN
-		assertThat(actualDto.getId()).isEqualTo(entity.getId());
-		assertThat(actualDto.getDescription()).isEqualTo(entity.getDescription());
-		assertThat(actualDto.getTitle()).isEqualTo(entity.getTitle());
-	}
+        //THEN
+        assertThat(actualDto.getId()).isEqualTo(entity.getId());
+        assertThat(actualDto.getDescription()).isEqualTo(entity.getDescription());
+        assertThat(actualDto.getTitle()).isEqualTo(entity.getTitle());
+    }
 
 }

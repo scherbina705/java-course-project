@@ -3,7 +3,6 @@ package com.stwitter;
 import com.stwitter.dao.HobbyDao;
 import com.stwitter.entity.Hobby;
 import com.stwitter.util.TestUtils;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +76,7 @@ public class HobbyDaoImplTest {
     @Test
     @Transactional
     @Rollback(true)
-    public void uopdateHobbyTest() {
+    public void updateHobbyTest() {
         //GIVEN
         String changedDescription = "Another Description";
         Hobby testHobby1 = TestUtils.getHobby();
@@ -104,10 +103,26 @@ public class HobbyDaoImplTest {
         hobbyDao.save(testHobby1);
 
         //WHEN
-        hobbyDao.delete(testHobby1);
+        hobbyDao.deleteAll(testHobby1);
 
         //THEN
         assertTrue(hobbyDao.findAll().isEmpty());
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void findHobbyByTitleTest() {
+        //GIVEN
+        Hobby testHobby = TestUtils.getHobby();
+        String hobbyTitle = testHobby.getTitle();
+        hobbyDao.save(testHobby);
+
+        //WHEN
+        Hobby foundHobby = hobbyDao.findHobbyByTitle(hobbyTitle);
+
+        //THEN
+        assertThat(foundHobby).isEqualTo(testHobby);
     }
 
 }

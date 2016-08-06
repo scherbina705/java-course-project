@@ -1,9 +1,11 @@
 package com.stwitter.entity;
 
-import javax.persistence.*;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by A.Shcherbina
@@ -13,7 +15,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Table(name = "Place")
 public class Place {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PLACE_ID")
     private Long id;
 
@@ -27,11 +29,8 @@ public class Place {
 
     private Float longtitude;
 
-    @OneToOne
-    @JoinColumn(name = "PERSON_ID",
-            foreignKey = @ForeignKey(name = "FK_PLACE_PERSON")
-    )
-    private Person person;
+    @OneToMany
+    private Set<Person> persons = new HashSet<>();
 
     public Place() {
 
@@ -45,12 +44,12 @@ public class Place {
         this.id = id;
     }
 
-    public Person getPerson() {
-        return person;
+    public Set<Person> getPersons() {
+        return persons;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersons(Set<Person> persons) {
+        this.persons = persons;
     }
 
     public String getTitle() {
@@ -98,14 +97,14 @@ public class Place {
         Place place = (Place) o;
 
         return new EqualsBuilder()
-                .append(getPerson(), place.getPerson())
+                .append(getPersons(), place.getPersons())
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(getPerson())
+                .append(getPersons())
                 .toHashCode();
     }
 }

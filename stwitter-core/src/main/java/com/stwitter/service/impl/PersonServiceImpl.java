@@ -1,17 +1,15 @@
 package com.stwitter.service.impl;
 
 
-import org.dozer.DozerBeanMapper;
-import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.stwitter.dao.FriendshipDao;
-import com.stwitter.dao.PersonDao;
+import com.stwitter.dao.*;
 import com.stwitter.dto.PersonDto;
 import com.stwitter.entity.Friendship;
 import com.stwitter.entity.Person;
 import com.stwitter.service.PersonService;
+import org.dozer.DozerBeanMapper;
+import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by A.Shcherbina
@@ -19,34 +17,50 @@ import com.stwitter.service.PersonService;
  */
 @Service
 public class PersonServiceImpl implements PersonService {
-	@Autowired
-	private PersonDao personDao;
+    @Autowired
+    private PersonDao personDao;
 
-	@Autowired
-	private FriendshipDao friendshipDao;
+    @Autowired
+    private FriendshipDao friendshipDao;
 
-	@Autowired
-	private DozerBeanMapper mapper;
+    @Autowired
+    private MessageDao messageDao;
 
-	@Override
-	public void addFriendship(Long personId, Long friendId) {
-		Person person = personDao.findById(personId);
-		Person friend = personDao.findById(friendId);
-		Friendship friendship = new Friendship();
-		friendship.setFriend(friend);
-		friendship.setPerson(person);
-		friendship.setDateFrom(LocalDate.now().toDate());
-		friendshipDao.save(friendship);
-	}
+    @Autowired
+    private PlaceDao placeDao;
 
-	@Override
-	public Long savePerson(PersonDto personDto) {
-		return personDao.save(mapper.map(personDto, Person.class));
-	}
+    @Autowired
+    private PostDao postDao;
 
-	@Override
-	public void removePerson(Long personId) {
-		Person entity = personDao.findById(personId);
-		personDao.delete(entity);
-	}
+    @Autowired
+    private DozerBeanMapper mapper;
+
+    @Override
+    public Long savePerson(PersonDto personDto) {
+        return personDao.save(mapper.map(personDto, Person.class));
+    }
+
+    @Override
+    public void removePerson(String personLogin) {
+        Person person = personDao.findByLogin(personLogin);
+        //Had to do so instead of just remove person, because according to required DB schema and it's columns these relations are unidirectional and can't delete parent entity by cascade
+        friendshipDao.deleteCollection(friendshipDao.findFriendshipsForPerson(person.getId()));
+        messageDao.deleteCollection(messageDao.findMessagesFromUser(person.getId()));
+        messageDao.deleteCollection(messageDao.findMessagesToUser(person.getId()));
+        postDao.deleteCollection(postDao.findPostsFromPerson(person.getId()));
+        placeDao.findPlaceForPerson(person).getPersons().remove(person);
+        personDao.deleteAll(person);
+    }
+
+    @Override
+    public void addFriendship(String personLogin, String friendLogin) {
+        Person person = personDao.findByLogin(personLogin);
+        Person friend = personDao.findByLogin(friendLogin);
+        Friendship friendship = new Friendship();
+        friendship.setFriend(friend);
+        friendship.setPerson(person);
+        friendship.setDateFrom(LocalDate.now().toDate());
+        friendshipDao.save(friendship);
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.stwitter.dao.impl;
 
-import com.stwitter.dao.GenericDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Component
 @Transactional
-public abstract class AbstractDao<T, PK extends Serializable>{
+public abstract class AbstractDao<T, PK extends Serializable> {
 
     @Autowired
     protected SessionFactory sessionFactory;
@@ -44,8 +44,16 @@ public abstract class AbstractDao<T, PK extends Serializable>{
         getSession().update(value);
     }
 
-    public void delete(T value) {
-        getSession().delete(value);
+    public void deleteAll(T... values) {
+        for (T aValue : values) {
+            getSession().delete(aValue);
+        }
+    }
+
+    public void deleteCollection(Collection<T> values) {
+        for (T aValue : values) {
+            deleteAll(aValue);
+        }
     }
 
     protected Session getSession() {

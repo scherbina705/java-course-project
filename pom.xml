@@ -26,6 +26,7 @@
         <assertj-core.version>3.4.1</assertj-core.version>
         <joda-time.version>2.9.4</joda-time.version>
         <junit-dataprovider.version>1.10.0</junit-dataprovider.version>
+        <commons-collections.version>3.0</commons-collections.version>
     </properties>
 
     <dependencies>
@@ -43,6 +44,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

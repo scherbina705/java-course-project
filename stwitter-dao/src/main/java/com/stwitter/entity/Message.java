@@ -1,10 +1,10 @@
 package com.stwitter.entity;
 
-import javax.persistence.*;
-import java.util.Date;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by A.Shcherbina
@@ -14,7 +14,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Table(name = "MESSAGE")
 public class Message {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MESSAGE_ID")
     private Long id;
 

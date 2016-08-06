@@ -6,7 +6,9 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by A.Shcherbina
@@ -17,15 +19,15 @@ import java.util.List;
 public class MessageDaoImpl extends AbstractDao<Message, Long> implements MessageDao {
 
     @Override
-    public List<Message> findMessagesFromUser(Long personId) {
+    public Set<Message> findMessagesFromUser(Long personId) {
         Query query = getSession().createQuery("from Message m where m.personFrom.id = :personId").setParameter("personId", personId);
-        return query.list();
+        return new HashSet<>(query.list());
     }
 
     @Override
-    public List<Message> findMessagesToUser(Long personId) {
+    public Set<Message> findMessagesToUser(Long personId) {
         Query query = getSession().createQuery("from Message m where m.personTo.id = :personId").setParameter("personId", personId);
-        return query.list();
+        return new HashSet<>(query.list());
     }
 
     @Override

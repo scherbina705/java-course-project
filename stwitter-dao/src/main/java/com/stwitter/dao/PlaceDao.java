@@ -1,7 +1,6 @@
 package com.stwitter.dao;
 
-import java.util.Set;
-
+import com.stwitter.entity.Person;
 import com.stwitter.entity.Place;
 
 /**
@@ -10,6 +9,5 @@ import com.stwitter.entity.Place;
  * @author Shcherbina A.
  */
 public interface PlaceDao extends GenericDao<Place, Long> {
-
-    Place findPlaceForPerson(Long personId);
+    Place findPlaceForPerson(Person person);
 }
