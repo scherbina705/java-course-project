@@ -18,6 +18,7 @@ public class Hobby {
     private Long id;
 
     @NaturalId
+    @Column(nullable = false)
     private String title;
 
     private String description;

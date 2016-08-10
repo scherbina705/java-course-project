@@ -35,7 +35,6 @@ public class InterestServiceImpl implements InterestService {
     @Autowired
     private DozerBeanMapper mapper;
 
-
     @Override
     public Long addPlace(PlaceDto placeDto) {
         return placeDao.save(mapper.map(placeDto, Place.class));
@@ -50,14 +49,12 @@ public class InterestServiceImpl implements InterestService {
     public Set<PersonDto> getPeopleWithHobby(String title) {
         Hobby hobby = hobbyDao.findHobbyByTitle(title);
         Set<Person> persons = personDao.findByHobby(hobby);
-        Set<PersonDto> personsDto = mapper.map(persons, Set.class);
-        return personsDto;
+        return mapper.map(persons, Set.class);
     }
 
     @Override
     public Set<PersonDto> getPeopleFromPlace(Place place) {
         Set<Person> persons = personDao.findByPlace(place);
-        Set<PersonDto> personsDto = mapper.map(persons, Set.class);
-        return personsDto;
+        return mapper.map(persons, Set.class);
     }
 }

@@ -1,5 +1,6 @@
 package stwitter.converter;
 
+import com.stwitter.dao.PersonDao;
 import com.stwitter.dto.FriendshipDto;
 import com.stwitter.entity.Friendship;
 import org.dozer.DozerBeanMapper;
@@ -7,8 +8,10 @@ import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import stwitter.util.TestConverterUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,11 +30,18 @@ public class FriendshipDozerMappingTest {
     @Autowired
     private DozerBeanMapper mapper;
 
+    @Autowired
+    private PersonDao personDao;
+
     @Test
+    @Transactional
+    @Rollback(true)
     public void testFriendshipDtoToEntityMapping() {
         //GIVEN
         FriendshipDto dto = getFriendshipDto();
         Friendship expectedEntity = getFriendshipEntity();
+        expectedEntity.getPerson().setId(null);
+        personDao.save(expectedEntity.getPerson());
 
         //WHEN
         Friendship actualEntity = mapper.map(dto, Friendship.class);
@@ -43,25 +53,27 @@ public class FriendshipDozerMappingTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(true)
     public void testFriendshipEntityToDtoMapping() {
         //GIVEN
         FriendshipDto expectedDto = getFriendshipDto();
         Friendship entity = getFriendshipEntity();
 
         //WHEN
-        FriendshipDto actualDto = mapper.map(expectedDto, FriendshipDto.class);
+        FriendshipDto actualDto = mapper.map(entity, FriendshipDto.class);
 
         //THEN
-        assertThat(actualDto.getFriend()).isEqualTo(expectedDto.getFriend());
-        assertThat(actualDto.getPerson()).isEqualTo(expectedDto.getPerson());
+        assertThat(actualDto.getFriendId()).isEqualTo(expectedDto.getFriendId());
+        assertThat(actualDto.getPersonId()).isEqualTo(expectedDto.getPersonId());
         assertThat(actualDto.getDateFrom()).isEqualTo(expectedDto.getDateFrom());
     }
 
     private FriendshipDto getFriendshipDto() {
         FriendshipDto f = new FriendshipDto();
         f.setDateFrom(TEST_DATE);
-        f.setPerson(TestConverterUtils.getPersonDto());
-        f.setFriend(TestConverterUtils.getPersonDto());
+        f.setPersonId(TestConverterUtils.getPersonDto().getId());
+        f.setFriendId(TestConverterUtils.getPersonDto().getId());
         return f;
     }
 

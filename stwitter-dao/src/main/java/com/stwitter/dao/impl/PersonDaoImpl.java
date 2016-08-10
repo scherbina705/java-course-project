@@ -32,6 +32,12 @@ public class PersonDaoImpl extends AbstractDao<Person, Long> implements PersonDa
     }
 
     @Override
+    public void addHobby(Person p, Hobby h) {
+        p.getHobbies().add(h);
+        getSession().update(p);
+    }
+
+    @Override
     public Set<Person> findByPlace(Place p) {
         Query query = getSession().createQuery("select p.persons from Place p where p=:place").setParameter("place", p);
         return new HashSet<>(query.list());

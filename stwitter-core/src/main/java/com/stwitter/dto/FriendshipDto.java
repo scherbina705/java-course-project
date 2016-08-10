@@ -10,17 +10,17 @@ import org.joda.time.LocalDate;
  * @author Shcherbina A.
  */
 public class FriendshipDto {
-    private PersonDto person;
-    private PersonDto friend;
+    private Long personId;
+    private Long friendId;
     private LocalDate dateFrom;
 
     public FriendshipDto() {
     }
 
-    public FriendshipDto(LocalDate dateFrom, PersonDto friend, PersonDto person) {
+    public FriendshipDto(LocalDate dateFrom, Long friendId, Long personId) {
         this.dateFrom = dateFrom;
-        this.friend = friend;
-        this.person = person;
+        this.friendId = friendId;
+        this.personId = personId;
     }
 
     public LocalDate getDateFrom() {
@@ -31,20 +31,20 @@ public class FriendshipDto {
         this.dateFrom = dateFrom;
     }
 
-    public PersonDto getFriend() {
-        return friend;
+    public Long getFriendId() {
+        return friendId;
     }
 
-    public void setFriend(PersonDto friend) {
-        this.friend = friend;
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
     }
 
-    public PersonDto getPerson() {
-        return person;
+    public Long getPersonId() {
+        return personId;
     }
 
-    public void setPerson(PersonDto person) {
-        this.person = person;
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
 
     @Override
@@ -60,8 +60,8 @@ public class FriendshipDto {
         FriendshipDto that = (FriendshipDto) o;
 
         return new EqualsBuilder()
-                .append(person, that.person)
-                .append(friend, that.friend)
+                .append(personId, that.personId)
+                .append(friendId, that.friendId)
                 .append(dateFrom, that.dateFrom)
                 .isEquals();
     }
@@ -69,8 +69,8 @@ public class FriendshipDto {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(person)
-                .append(friend)
+                .append(personId)
+                .append(friendId)
                 .append(dateFrom)
                 .toHashCode();
     }

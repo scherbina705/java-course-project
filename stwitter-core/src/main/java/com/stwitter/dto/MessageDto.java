@@ -13,8 +13,8 @@ public class MessageDto {
     private Long id;
     private String content;
     private LocalDateTime timeSent;
-    private PersonDto personFrom;
-    private PersonDto personTo;
+    private Long personFromId;
+    private Long personToId;
 
     public String getContent() {
         return content;
@@ -32,20 +32,20 @@ public class MessageDto {
         this.id = id;
     }
 
-    public PersonDto getPersonFrom() {
-        return personFrom;
+    public Long getPersonFromId() {
+        return personFromId;
     }
 
-    public void setPersonFrom(PersonDto personFrom) {
-        this.personFrom = personFrom;
+    public void setPersonFromId(Long personFromId) {
+        this.personFromId = personFromId;
     }
 
-    public PersonDto getPersonTo() {
-        return personTo;
+    public Long getPersonToId() {
+        return personToId;
     }
 
-    public void setPersonTo(PersonDto personTo) {
-        this.personTo = personTo;
+    public void setPersonToId(Long personToId) {
+        this.personToId = personToId;
     }
 
     public LocalDateTime getTimeSent() {
@@ -72,8 +72,8 @@ public class MessageDto {
                 .append(id, that.id)
                 .append(content, that.content)
                 .append(timeSent, that.timeSent)
-                .append(personFrom, that.personFrom)
-                .append(personTo, that.personTo)
+                .append(personFromId, that.personFromId)
+                .append(personToId, that.personToId)
                 .isEquals();
     }
 
@@ -83,8 +83,8 @@ public class MessageDto {
                 .append(id)
                 .append(content)
                 .append(timeSent)
-                .append(personFrom)
-                .append(personTo)
+                .append(personFromId)
+                .append(personToId)
                 .toHashCode();
     }
 }

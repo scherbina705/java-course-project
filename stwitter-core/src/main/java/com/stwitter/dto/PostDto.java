@@ -13,8 +13,7 @@ public class PostDto {
     private String title;
     private String content;
     private LocalDateTime placeTime;
-    private PersonDto person;
-    private PlaceDto place;
+    private Long personId;
 
     public String getContent() {
         return content;
@@ -32,20 +31,12 @@ public class PostDto {
         this.id = id;
     }
 
-    public PersonDto getPerson() {
-        return person;
+    public Long getPersonId() {
+        return personId;
     }
 
-    public void setPerson(PersonDto person) {
-        this.person = person;
-    }
-
-    public PlaceDto getPlace() {
-        return place;
-    }
-
-    public void setPlace(PlaceDto place) {
-        this.place = place;
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
 
     public LocalDateTime getPlaceTime() {
@@ -81,8 +72,7 @@ public class PostDto {
                 .append(title, postDto.title)
                 .append(content, postDto.content)
                 .append(placeTime, postDto.placeTime)
-                .append(person, postDto.person)
-                .append(place, postDto.place)
+                .append(personId, postDto.personId)
                 .isEquals();
     }
 
@@ -93,8 +83,7 @@ public class PostDto {
                 .append(title)
                 .append(content)
                 .append(placeTime)
-                .append(person)
-                .append(place)
+                .append(personId)
                 .toHashCode();
     }
 }

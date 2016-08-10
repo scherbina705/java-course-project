@@ -126,4 +126,10 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Set<Long> getHobbiesId() {
+        Set<Long> hobbiesId = new HashSet<>();
+        getHobbies().forEach(hobby -> hobbiesId.add(hobby.getId()));
+        return hobbiesId;
+    }
 }

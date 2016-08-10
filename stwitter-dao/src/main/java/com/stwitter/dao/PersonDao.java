@@ -19,4 +19,6 @@ public interface PersonDao extends GenericDao<Person, Long> {
     Set<Person> findByHobby(Hobby h);
 
     Set<Person> findByPlace(Place p);
+
+    void addHobby(Person p, Hobby h);
 }

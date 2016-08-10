@@ -1,13 +1,16 @@
 package stwitter.converter;
 
+import com.stwitter.dao.PersonDao;
 import com.stwitter.dto.MessageDto;
 import com.stwitter.entity.Message;
 import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import stwitter.util.TestConverterUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +27,12 @@ public class MessageDozerMappingTest {
     @Autowired
     private DozerBeanMapper mapper;
 
+    @Autowired
+    private PersonDao personDao;
+
     @Test
+    @Transactional
+    @Rollback(true)
     public void testMessageEntityToDtoMapping() {
         //GIVEN
         Message entity = getMessageEntity();
@@ -36,17 +44,23 @@ public class MessageDozerMappingTest {
         //THEN
         assertThat(actualDto.getId()).isEqualTo(expectedDto.getId());
         assertThat(actualDto.getContent()).isEqualTo(expectedDto.getContent());
-        assertThat(actualDto.getPersonFrom()).isEqualTo(expectedDto.getPersonFrom());
-        assertThat(actualDto.getPersonTo()).isEqualTo(expectedDto.getPersonTo());
+        assertThat(actualDto.getPersonFromId()).isEqualTo(expectedDto.getPersonFromId());
+        assertThat(actualDto.getPersonToId()).isEqualTo(expectedDto.getPersonToId());
         assertThat(actualDto.getTimeSent()).isEqualTo(expectedDto.getTimeSent());
 
     }
 
     @Test
+    @Transactional
+    @Rollback(true)
     public void testMessageDtoToEntityMapping() {
         //GIVEN
         MessageDto dto = getMessageDto();
         Message expectedEntity = getMessageEntity();
+        expectedEntity.getPersonFrom().setId(null);
+        Long expectedId = personDao.save(expectedEntity.getPersonFrom());
+        dto.setPersonFromId(expectedId);
+        dto.setPersonToId(expectedId);
 
         //WHEN
         Message actualEntity = mapper.map(dto, Message.class);
@@ -63,8 +77,8 @@ public class MessageDozerMappingTest {
         MessageDto dto = new MessageDto();
         dto.setId(1L);
         dto.setContent("Content");
-        dto.setPersonFrom(TestConverterUtils.getPersonDto());
-        dto.setPersonFrom(TestConverterUtils.getPersonDto());
+        dto.setPersonFromId(TestConverterUtils.getPersonDto().getId());
+        dto.setPersonToId(TestConverterUtils.getPersonDto().getId());
         dto.setTimeSent(TestConverterUtils.getTestDateTime());
         return dto;
     }
@@ -74,7 +88,7 @@ public class MessageDozerMappingTest {
         m.setId(1L);
         m.setContent("Content");
         m.setPersonFrom(TestConverterUtils.getPerson());
-        m.setPersonFrom(TestConverterUtils.getPerson());
+        m.setPersonTo(TestConverterUtils.getPerson());
         m.setTimeSent(TestConverterUtils.getTestDateTime().toDate());
         return m;
     }

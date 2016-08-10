@@ -6,8 +6,10 @@ import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import stwitter.util.TestConverterUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +27,8 @@ public class HobbyDozerMappingTest {
     private DozerBeanMapper mapper;
 
     @Test
+    @Transactional
+    @Rollback(true)
     public void testHobbyDtoToEntityMapping() {
         //GIVEN
         HobbyDto dto = TestConverterUtils.getHobbyDto();
@@ -40,6 +44,8 @@ public class HobbyDozerMappingTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(true)
     public void testHobbyEntityToDtoMapping() {
         //GIVEN
         HobbyDto expectedDto = TestConverterUtils.getHobbyDto();

@@ -19,7 +19,7 @@ public class PersonDto {
     private String login;
     private String password;
     private LocalDate birthday;
-    private Set<HobbyDto> hobbies = new HashSet<>();
+    private Set<Long> hobbiesId = new HashSet<>();
 
     public LocalDate getBirthday() {
         return birthday;
@@ -45,12 +45,12 @@ public class PersonDto {
         this.firstName = firstName;
     }
 
-    public Set<HobbyDto> getHobbies() {
-        return hobbies;
+    public Set<Long> getHobbiesId() {
+        return hobbiesId;
     }
 
-    public void setHobbies(Set<HobbyDto> hobbies) {
-        this.hobbies = hobbies;
+    public void setHobbiesId(Set<Long> hobbiesId) {
+        this.hobbiesId = hobbiesId;
     }
 
     public Long getId() {
@@ -105,7 +105,7 @@ public class PersonDto {
                 .append(login, personDto.login)
                 .append(password, personDto.password)
                 .append(birthday, personDto.birthday)
-                .append(hobbies, personDto.hobbies)
+                .append(hobbiesId, personDto.hobbiesId)
                 .isEquals();
     }
 
@@ -119,7 +119,7 @@ public class PersonDto {
                 .append(login)
                 .append(password)
                 .append(birthday)
-                .append(hobbies)
+                .append(hobbiesId)
                 .toHashCode();
     }
 }

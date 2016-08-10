@@ -37,13 +37,15 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Long savePerson(PersonDto personDto) {
+        Person person = new Person();
         return personDao.save(mapper.map(personDto, Person.class));
     }
 
     @Override
     public void removePerson(String personLogin) {
         Person person = personDao.findByLogin(personLogin);
-        //Had to do so instead of just remove person, because according to required DB schema and it's columns these relations are unidirectional and can't delete parent entity by cascade
+        //Done so, because for current table schema's size cheaper to remove entities one by one,
+        // instead of putting bidirectional associations in Person entity detach related entities before remove action
         friendshipDao.deleteCollection(friendshipDao.findFriendshipsForPerson(person.getId()));
         messageDao.deleteCollection(messageDao.findMessagesFromUser(person.getId()));
         messageDao.deleteCollection(messageDao.findMessagesToUser(person.getId()));

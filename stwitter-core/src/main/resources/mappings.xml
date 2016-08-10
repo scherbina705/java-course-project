@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
     <configuration>
-        <custom-converters> <!-- these are always bi-directional -->
+        <custom-converters>
             <converter type="com.stwitter.converter.LocalDateCustomConverter">
                 <class-a>java.util.Date</class-a>
                 <class-b>org.joda.time.LocalDate</class-b>
@@ -14,7 +14,28 @@
                 <class-a>java.util.Date</class-a>
                 <class-b>org.joda.time.LocalDateTime</class-b>
             </converter>
+
+            <converter type="com.stwitter.converter.PersonDtoConverter">
+                <class-a>com.stwitter.entity.Person</class-a>
+                <class-b>com.stwitter.dto.PersonDto</class-b>
+            </converter>
+
+            <converter type="com.stwitter.converter.FriendshipDtoConverter">
+                <class-a>com.stwitter.entity.Friendship</class-a>
+                <class-b>com.stwitter.dto.FriendshipDto</class-b>
+            </converter>
+
+            <converter type="com.stwitter.converter.MessageDtoConverter">
+                <class-a>com.stwitter.entity.Message</class-a>
+                <class-b>com.stwitter.dto.MessageDto</class-b>
+            </converter>
+
+            <converter type="com.stwitter.converter.PlaceDtoConverter">
+                <class-a>com.stwitter.entity.Place</class-a>
+                <class-b>com.stwitter.dto.PlaceDto</class-b>
+            </converter>
         </custom-converters>
+
     </configuration>
 
 </mappings>

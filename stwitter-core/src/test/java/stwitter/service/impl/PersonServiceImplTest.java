@@ -1,7 +1,6 @@
 package stwitter.service.impl;
 
 import com.stwitter.dao.*;
-import com.stwitter.dto.HobbyDto;
 import com.stwitter.dto.PersonDto;
 import com.stwitter.entity.*;
 import com.stwitter.service.PersonService;
@@ -55,15 +54,16 @@ public class PersonServiceImplTest {
     public void savePersonTest() {
         //GIVEN
         PersonDto personDto = TestServiceUtils.getPersonDto();
-        HobbyDto hobbyDto = TestServiceUtils.getHobbyDto();
-        personDto.getHobbies().add(hobbyDto);
+        Hobby hobbyToSave = TestServiceUtils.getHobby();
+        Long hobbyId = hobbyDao.save(hobbyToSave);
+        personDto.getHobbiesId().add(hobbyId);
 
         //WHEN
         Long savedPersonId = personService.savePerson(personDto);
 
         //THEN
         Person savedPerson = personDao.findById(savedPersonId);
-        assertThat(savedPerson.getId()).isEqualTo(1L);
+        assertThat(savedPerson.getId()).isNotNull();
         assertThat(savedPerson.getEmail()).isEqualTo(personDto.getEmail());
         assertThat(savedPerson.getBirthday()).isEqualTo(personDto.getBirthday().toDate());
         assertThat(savedPerson.getFirstName()).isEqualTo(personDto.getFirstName());
@@ -71,10 +71,10 @@ public class PersonServiceImplTest {
         assertThat(savedPerson.getLogin()).isEqualTo(personDto.getLogin());
         assertThat(savedPerson.getPassword()).isEqualTo(personDto.getPassword());
         assertThat(savedPerson.getHobbies().size()).isEqualTo(1);
-        Hobby hobby = new ArrayList<Hobby>(savedPerson.getHobbies()).get(0);
-        assertThat(hobby.getId()).isEqualTo(1L);
-        assertThat(hobby.getDescription()).isEqualTo(hobbyDto.getDescription());
-        assertThat(hobby.getTitle()).isEqualTo(hobbyDto.getTitle());
+        Hobby hobby = new ArrayList<>(savedPerson.getHobbies()).get(0);
+        assertThat(hobby.getId()).isNotNull();
+        assertThat(hobby.getDescription()).isEqualTo(hobbyToSave.getDescription());
+        assertThat(hobby.getTitle()).isEqualTo(hobbyToSave.getTitle());
     }
 
     @Test

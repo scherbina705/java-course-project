@@ -10,10 +10,20 @@
     <import resource="classpath*:spring/persistence-context.xml"/>
 
     <context:component-scan base-package="com.stwitter.service.impl"/>
+    <context:component-scan base-package="com.stwitter.converter"/>
+
     <bean id="dozerMapper" class="org.dozer.DozerBeanMapper">
         <property name="mappingFiles">
             <list>
                 <value>mappings.xml</value>
+            </list>
+        </property>
+        <property name="customConverters">
+            <list>
+                <ref bean="friendshipDtoConverter"/>
+                <ref bean="personDtoConverter"/>
+                <ref bean="messageDtoConverter"/>
+                <ref bean="placeDtoConverter"/>
             </list>
         </property>
     </bean>

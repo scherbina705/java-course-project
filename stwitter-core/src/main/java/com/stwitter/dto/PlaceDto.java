@@ -17,7 +17,7 @@ public class PlaceDto {
     private String description;
     private Float latitude;
     private Float longtitude;
-    private Set<PersonDto> persons = new HashSet<>();
+    private Set<Long> personsId = new HashSet<>();
 
     public String getDescription() {
         return description;
@@ -51,12 +51,12 @@ public class PlaceDto {
         this.longtitude = longtitude;
     }
 
-    public Set<PersonDto> getPersons() {
-        return persons;
+    public Set<Long> getPersonsId() {
+        return personsId;
     }
 
-    public void setPersons(Set<PersonDto> persons) {
-        this.persons = persons;
+    public void setPersonsId(Set<Long> personsId) {
+        this.personsId = personsId;
     }
 
     public String getTitle() {
@@ -85,7 +85,7 @@ public class PlaceDto {
                 .append(description, placeDto.description)
                 .append(latitude, placeDto.latitude)
                 .append(longtitude, placeDto.longtitude)
-                .append(persons, placeDto.persons)
+                .append(personsId, placeDto.personsId)
                 .isEquals();
     }
 
@@ -97,7 +97,7 @@ public class PlaceDto {
                 .append(description)
                 .append(latitude)
                 .append(longtitude)
-                .append(persons)
+                .append(personsId)
                 .toHashCode();
     }
 }
