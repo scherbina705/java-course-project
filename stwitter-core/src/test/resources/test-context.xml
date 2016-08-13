@@ -2,7 +2,7 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-<import resource="service-context.xml"/>
+    <import resource="service-context.xml"/>
 
     <jdbc:embedded-database id="dataSource" type="H2">
     </jdbc:embedded-database>

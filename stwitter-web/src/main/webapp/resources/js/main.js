@@ -65,7 +65,7 @@ var Home = React.createClass({
 
     componentDidMount: function () {
         var self = this;
-        $.get("getLatestStwitts", function (data, status) {
+        $.get("getLatestStwitts", function (data) {
             self.setState(data);
         });
     },
@@ -74,22 +74,27 @@ var Home = React.createClass({
         console.log(this.state);
 
         if (!this.state) {
-            return <div></div>
+            return (<div>
+                <h2>Ups... something went wrong</h2>
+            </div>);
         }
 
         var self = this;
-        var elements = [];
+        var stwitts = [];
         Object.keys(this.state).forEach(function (key) {
-            elements.push(
-                <div key={key}>
+            stwitts.push(
+                <div className="stwitt">
                     <div className="row stwitt-block">
                         <div className="avatar col-md-1">
-                            <img src="/resources/images/avatar-temp.jpg" className="img-thumbnail" width="85"
-                                 height="85"/>
+                            <img src={"/resources/images/avatars/".concat(self.state[key].authorLogin, "/avatar.jpg")}
+                                 className="img-thumbnail avatar"/>
                         </div>
                         <div className="stwitt-content col-md11">
                             <div className="author">
-                                <a href="/temp.html">{self.state[key].authorLogin}</a>
+                                <p><b>
+                                    <a href="/temp.html">{self.state[key].authorLogin}</a> &rarr;{self.state[key].title}
+                                </b>
+                                </p>
                             </div>
                             <div className="stwitt-text">
                                 <p>{self.state[key].content}</p>
@@ -108,7 +113,7 @@ var Home = React.createClass({
         return (
             <div>
                 <h2>What people stwitted recently:</h2>
-                {elements}
+                {stwitts}
             </div>
         );
     }
@@ -119,10 +124,7 @@ var MyStwitts = React.createClass({
     render: function () {
         return (
             <div>
-                <h2>GOT QUESTIONS?</h2>
-                <p>The easiest thing to do is post on
-                    our <a href="http://forum.kirupa.com">forums</a>.
-                </p>
+                <h2>Well, page isn't ready yet</h2>
             </div>
         );
     }
@@ -133,16 +135,7 @@ var Profile = React.createClass({
     render: function () {
         return (
             <div>
-                <h2>STUFF</h2>
-                <p>Mauris sem velit, vehicula eget sodales vitae,
-                    rhoncus eget sapien:</p>
-                <ol>
-                    <li>Nulla pulvinar diam</li>
-                    <li>Facilisis bibendum</li>
-                    <li>Vestibulum vulputate</li>
-                    <li>Eget erat</li>
-                    <li>Id porttitor</li>
-                </ol>
+                <h2>One day you'll see some person profile here</h2>
             </div>
         );
     }
@@ -150,7 +143,33 @@ var Profile = React.createClass({
 
 //Регистрация
 var Register = React.createClass({
+    componentDidMount: function () {
+        var self = this;
+        $.get("getAllHobbies", function (data) {
+            self.setState(data);
+        });
+    },
+
     render: function () {
+        if (!this.state) {
+            return (<div>
+                <h2>Ups... something went wrong</h2>
+            </div>);
+        }
+
+        var self = this;
+        var hobbies = [];
+        Object.keys(this.state).forEach(function (key) {
+            hobbies.push(
+                <div id="hobbies" className="form-group">
+                    <label className="checkbox-inline" title={self.state[key].description}>
+                        <input type="checkbox" value={self.state[key].id} path="hobby"/>
+                        {self.state[key].title}
+                    </label>
+                </div>
+            );
+        });
+
         return (
             <div>
                 <form id="registration-form" role="form" action="register" method="post" commandName="userForm">
@@ -168,19 +187,12 @@ var Register = React.createClass({
                     </div>
                     <div className="form-group">
                         <label for="hobbies">Your hobby: </label>
-                        <div id="hobbies" className="form-group">
-                            <label className="checkbox-inline"><input type="checkbox" value="reading" path="hobby"/>Reading</label>
-                            <label className="checkbox-inline"><input type="checkbox" value="tv"/>Watching TV</label>
-                            <label className="checkbox-inline"><input type="checkbox" value="family-time"/>Family
-                                Time</label>
-                            <label className="checkbox-inline"><input type="checkbox" value="movies"/>Going to
-                                Movies</label>
-                            <label className="checkbox-inline"><input type="checkbox" value="fishing"/>Fishing</label>
-                            <label className="checkbox-inline"><input type="checkbox" value="computer"/>Computer</label>
-                            <label className="checkbox-inline"><input type="checkbox"
-                                                                      value="gardening"/>Gardening</label>
-                            <label className="checkbox-inline"><input type="checkbox" value="walking"/>Walking</label>
-                        </div>
+                        {hobbies}
+                    </div>
+                    <div className="form-group">
+                        <label for="birthdate">Your birthday: </label>
+                        <input type="text" className="form-control" placeholder="click to show datepicker"
+                               id="example1"/>
                     </div>
                     <button type="submit" className="btn btn-default center-block">Submit</button>
                 </form>
