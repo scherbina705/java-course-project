@@ -19,7 +19,7 @@ INSERT INTO POST (POST_ID, CONTENT, PERSON_ID, PLACE_TIME, TITLE) values (4, 'Х
 INSERT INTO PERSON (PERSON_ID, BIRTHDAY, EMAIL, FIRST_NAME, LAST_NAME, LOGIN, PASSWORD) values (3, '2000-02-02', 'email3@mail.com', 'Jack', 'Jackson', 'jacky', '12345');
 INSERT INTO PERSON_HOBBY (Person_PERSON_ID, hobbies_HOBBY_ID) values (3, 3);
 INSERT INTO PERSON_HOBBY (Person_PERSON_ID, hobbies_HOBBY_ID) values (3, 1);
-INSERT INTO POST (POST_ID, CONTENT, PERSON_ID, PLACE_TIME, TITLE) values (5, 'xxx: как успехи с переходом на инглиш? yyy: yt jxtym).', 3, '2016-06-03 09:10:11', 'Не могу в иностраннй');
+INSERT INTO POST (POST_ID, CONTENT, PERSON_ID, PLACE_TIME, TITLE) values (5, 'Неужели я настолько стара? У Убунты уже кончились буковки для названий дистрибутивов!', 3, '2016-06-03 09:10:11', 'Не могу в иностраннй');
 INSERT INTO POST (POST_ID, CONTENT, PERSON_ID, PLACE_TIME, TITLE) values (6, 'Я — функциональщик. Прекрасно себя чувствую. Это вы от объектов такой раздражительный.', 3, '2016-01-07 09:27:16', 'Объекты не в радость');
 
 
