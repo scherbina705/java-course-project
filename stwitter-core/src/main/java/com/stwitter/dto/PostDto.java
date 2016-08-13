@@ -1,5 +1,9 @@
 package com.stwitter.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.stwitter.converter.CustomLocalDateTimeDeserializer;
+import com.stwitter.converter.CustomLocalDateTimeSerializer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.joda.time.LocalDateTime;
@@ -12,8 +16,10 @@ public class PostDto {
     private Long id;
     private String title;
     private String content;
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
     private LocalDateTime placeTime;
-    private Long personId;
+    private String authorLogin;
 
     public String getContent() {
         return content;
@@ -21,6 +27,7 @@ public class PostDto {
 
     public void setContent(String content) {
         this.content = content;
+
     }
 
     public Long getId() {
@@ -31,12 +38,12 @@ public class PostDto {
         this.id = id;
     }
 
-    public Long getPersonId() {
-        return personId;
+    public String getAuthorLogin() {
+        return authorLogin;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setAuthorLogin(String authorLogin) {
+        this.authorLogin = authorLogin;
     }
 
     public LocalDateTime getPlaceTime() {
@@ -72,7 +79,7 @@ public class PostDto {
                 .append(title, postDto.title)
                 .append(content, postDto.content)
                 .append(placeTime, postDto.placeTime)
-                .append(personId, postDto.personId)
+                .append(authorLogin, postDto.authorLogin)
                 .isEquals();
     }
 
@@ -83,7 +90,7 @@ public class PostDto {
                 .append(title)
                 .append(content)
                 .append(placeTime)
-                .append(personId)
+                .append(authorLogin)
                 .toHashCode();
     }
 }

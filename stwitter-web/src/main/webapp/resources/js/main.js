@@ -89,13 +89,14 @@ var Home = React.createClass({
                         </div>
                         <div className="stwitt-content col-md11">
                             <div className="author">
-                                <a href="/temp.html">{self.state[key].author.nickName}</a>
+                                <a href="/temp.html">{self.state[key].authorLogin}</a>
                             </div>
                             <div className="stwitt-text">
-                                <p>{self.state[key].postText}</p>
+                                <p>{self.state[key].content}</p>
                             </div>
                             <div className="stwitt-meta-info text-right">
-                                <p><em>&rarr; Posted on {new Date(self.state[key].creationDateTime).toDateString()}</em>
+                                <p><em>&rarr; Posted on {self.state[key].placeTime.date}
+                                    at {self.state[key].placeTime.time}</em>
                                 </p>
                             </div>
                         </div>
@@ -147,6 +148,7 @@ var Profile = React.createClass({
     }
 });
 
+//Регистрация
 var Register = React.createClass({
     render: function () {
         return (

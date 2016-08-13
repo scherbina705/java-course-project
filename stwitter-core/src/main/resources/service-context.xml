@@ -24,6 +24,7 @@
                 <ref bean="personDtoConverter"/>
                 <ref bean="messageDtoConverter"/>
                 <ref bean="placeDtoConverter"/>
+                <ref bean="postDtoConverter"/>
             </list>
         </property>
     </bean>

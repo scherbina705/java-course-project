@@ -14,6 +14,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -56,5 +57,11 @@ public class InterestServiceImpl implements InterestService {
     public Set<PersonDto> getPeopleFromPlace(Place place) {
         Set<Person> persons = personDao.findByPlace(place);
         return mapper.map(persons, Set.class);
+    }
+
+    @Override
+    public Set<HobbyDto> getAllHobbies() {
+        Set<Hobby> hobbies = new HashSet<>(hobbyDao.findAll());
+        return mapper.map(hobbies, Set.class);
     }
 }

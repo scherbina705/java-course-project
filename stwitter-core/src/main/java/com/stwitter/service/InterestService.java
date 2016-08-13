@@ -20,4 +20,6 @@ public interface InterestService {
     Set<PersonDto> getPeopleWithHobby(String title);
 
     Set<PersonDto> getPeopleFromPlace(Place place);
+
+    Set<HobbyDto> getAllHobbies();
 }

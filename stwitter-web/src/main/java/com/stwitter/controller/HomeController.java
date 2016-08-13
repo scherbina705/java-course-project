@@ -1,7 +1,9 @@
 package com.stwitter.controller;
 
+import com.stwitter.dto.HobbyDto;
 import com.stwitter.dto.PersonDto;
 import com.stwitter.dto.PostDto;
+import com.stwitter.service.InterestService;
 import com.stwitter.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by A.Shcherbina
@@ -30,6 +33,10 @@ public class HomeController {
     @Autowired
     public PostService postService;
 
+    @Autowired
+    public InterestService interestService;
+
+
     @RequestMapping({"/home"})
     public String home(Locale locale, Model model) {
         logger.info("Welcome home! The client locale is {}.", locale);
@@ -42,6 +49,13 @@ public class HomeController {
     @ResponseBody
     List<PostDto> getLatestStwitts() {
         return postService.getLatestPosts(POSTS_NUMBER);
+    }
+
+    @RequestMapping({"/getAllHobbies"})
+    public
+    @ResponseBody
+    Set<HobbyDto> getAllHobbies() {
+        return interestService.getAllHobbies();
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

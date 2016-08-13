@@ -86,7 +86,7 @@ public class TestServiceUtils {
         PostDto p = new PostDto();
         p.setTitle("Title");
         p.setContent("Content");
-        p.setPersonId(getPersonDto().getId());
+        p.setAuthorLogin(getPersonDto().getLogin());
         p.setPlaceTime(TEST_DATE_TIME);
         return p;
     }
