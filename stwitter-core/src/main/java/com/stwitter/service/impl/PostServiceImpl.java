@@ -8,6 +8,7 @@ import com.stwitter.service.PostService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -46,6 +47,7 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
+    @Transactional
     public LinkedList<PostDto> getLatestPosts(int postsNumber) {
         Set<Post> posts = postDao.findLatestPosts(postsNumber);
         LinkedList<PostDto> sortedPostsDto = new LinkedList<>();

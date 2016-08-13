@@ -39,6 +39,7 @@ public class Person {
     private Set<Hobby> hobbies = new HashSet<>();
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "BIRTHDAY")
     private Date birthday;
 
     public Person() {

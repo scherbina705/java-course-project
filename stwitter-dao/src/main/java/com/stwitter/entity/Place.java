@@ -12,21 +12,23 @@ import java.util.Set;
  * on 10.07.2016.
  */
 @Entity
-@Table(name = "Place")
+@Table(name = "PLACE")
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PLACE_ID")
     private Long id;
 
-    @Column(nullable = true)
+    @Column(name = "TITLE", nullable = true)
     private String title;
 
-    @Column(nullable = true)
+    @Column(name = "DESCRIPTION", nullable = true)
     private String description;
 
+    @Column(name = "LATITUDE")
     private Float latitude;
 
+    @Column(name = "LONGTITUDE")
     private Float longtitude;
 
     @OneToMany

@@ -18,9 +18,10 @@ public class Hobby {
     private Long id;
 
     @NaturalId
-    @Column(nullable = false)
+    @Column(name = "TITLE", nullable = false)
     private String title;
 
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public Hobby(String title, String description) {

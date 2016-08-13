@@ -18,9 +18,12 @@ public class Post {
     @Column(name = "POST_ID")
     private Long id;
 
+    @Column(name = "TITLE")
     private String title;
 
+    @Column(name = "CONTENT")
     private String content;
+
     @Column(name = "PLACE_TIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date placeTime;
