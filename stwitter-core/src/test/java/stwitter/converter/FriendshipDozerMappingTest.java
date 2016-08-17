@@ -38,10 +38,16 @@ public class FriendshipDozerMappingTest {
     @Rollback(true)
     public void testFriendshipDtoToEntityMapping() {
         //GIVEN
-        FriendshipDto dto = getFriendshipDto();
         Friendship expectedEntity = getFriendshipEntity();
         expectedEntity.getPerson().setId(null);
-        personDao.save(expectedEntity.getPerson());
+        expectedEntity.getFriend().setId(null);
+        expectedEntity.getFriend().setLogin("any_other_login");
+        Long expectedPersonId = personDao.save(expectedEntity.getPerson());
+        Long expectedFriendId = personDao.save(expectedEntity.getFriend());
+
+        FriendshipDto dto = getFriendshipDto();
+        dto.setPersonId(expectedPersonId);
+        dto.setFriendId(expectedFriendId);
 
         //WHEN
         Friendship actualEntity = mapper.map(dto, Friendship.class);
