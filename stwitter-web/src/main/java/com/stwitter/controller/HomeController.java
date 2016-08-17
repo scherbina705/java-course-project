@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,8 +37,7 @@ public class HomeController {
 
 
     @RequestMapping({"/home"})
-    public String home(Locale locale, Model model) {
-        logger.info("Welcome home! The client locale is {}.", locale);
+    public String home(Model model) {
         model.addAttribute("latestPosts", postService.getLatestPosts(POSTS_NUMBER));
         return "home";
     }

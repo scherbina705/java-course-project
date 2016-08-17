@@ -6,20 +6,20 @@
 /*border:1px solid red;*/
 /*}*/
 
-.avatar {
-    padding: 0;
-}
-
 #menu {
     margin: 0;
 }
 
+#logo {
+    margin-right: 15px;
+}
+
 #main-content {
-    /*height: 100%;*/
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    height: 100%;
+    /*display: -webkit-box;*/
+    /*display: -webkit-flex;*/
+    /*display: -ms-flexbox;*/
+    /*display: flex;*/
     padding-left: 30px;
     padding-right: 40px;
     background-color: aliceblue;
@@ -53,6 +53,7 @@
 }
 
 .avatar {
+    padding: 0;
     width: 60px;
     height: 60px;
 }

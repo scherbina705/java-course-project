@@ -49,6 +49,8 @@ public class PostDozerMappingTest {
         entity.setPerson(person);
         Long expectedId = postDao.save(entity);
 
+        postDao.likePost(entity, person);
+
         PostDto expectedDto = TestConverterUtils.getPostDto();
 
         //WHEN
@@ -60,6 +62,7 @@ public class PostDozerMappingTest {
         assertThat(actualDto.getTitle()).isEqualTo(expectedDto.getTitle());
         assertThat(actualDto.getPlaceTime()).isEqualTo(expectedDto.getPlaceTime());
         assertThat(actualDto.getAuthorLogin()).isEqualTo(expectedPersonLogin);
+        assertThat(actualDto.getPostLikes()).isEqualTo(1L);
     }
 
     @Test

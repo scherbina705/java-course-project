@@ -1,6 +1,7 @@
 package com.stwitter.converter;
 
 import com.stwitter.dao.PersonDao;
+import com.stwitter.dao.PostDao;
 import com.stwitter.dto.PostDto;
 import com.stwitter.entity.Post;
 import org.dozer.DozerConverter;
@@ -16,6 +17,9 @@ public class PostDtoConverter extends DozerConverter<Post, PostDto> {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private PostDao postDao;
+
     public PostDtoConverter() {
         super(Post.class, PostDto.class);
     }
@@ -29,6 +33,7 @@ public class PostDtoConverter extends DozerConverter<Post, PostDto> {
         dto.setPlaceTime(new LocalDateTime(post.getPlaceTime()));
         dto.setContent(post.getContent());
         dto.setAuthorLogin(post.getPerson().getLogin());
+        dto.setPostLikes(Long.valueOf(postDao.findPersonsLikedPost(post).size()));
         return dto;
     }
 

@@ -21,13 +21,14 @@ public class PostDto {
     private LocalDateTime placeTime;
     private String authorLogin;
 
+    private Long postLikes;
+
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
-
     }
 
     public Long getId() {
@@ -92,5 +93,13 @@ public class PostDto {
                 .append(placeTime)
                 .append(authorLogin)
                 .toHashCode();
+    }
+
+    public Long getPostLikes() {
+        return postLikes;
+    }
+
+    public void setPostLikes(Long postLikes) {
+        this.postLikes = postLikes;
     }
 }
