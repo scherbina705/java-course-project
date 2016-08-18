@@ -8,6 +8,8 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * Created by A.Shcherbina
  * on 10.08.2016.
@@ -29,7 +31,7 @@ public class PersonDtoConverter extends DozerConverter<Person, PersonDto> {
         dto.setFirstName(person.getFirstName());
         dto.setLastName(person.getLastName());
         dto.setLogin(person.getLogin());
-        dto.setBirthday(new LocalDate(person.getBirthday()));
+        dto.setBirthday(new LocalDate(person.getBirthday()).toString());
         dto.setEmail(person.getEmail());
         dto.setPassword(person.getPassword());
         dto.setHobbiesId(person.getHobbiesId());
@@ -43,7 +45,7 @@ public class PersonDtoConverter extends DozerConverter<Person, PersonDto> {
         entity.setFirstName(personDto.getFirstName());
         entity.setLastName(personDto.getLastName());
         entity.setLogin(personDto.getLogin());
-        entity.setBirthday(personDto.getBirthday().toDate());
+        entity.setBirthday(LocalDate.parse(personDto.getBirthday()).toDate());
         entity.setEmail(personDto.getEmail());
         entity.setPassword(personDto.getPassword());
         if (!personDto.getHobbiesId().isEmpty()) {

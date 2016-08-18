@@ -67,7 +67,7 @@ public class TestServiceUtils {
 
     public static PersonDto getPersonDto() {
         PersonDto p = new PersonDto();
-        p.setBirthday(TEST_DATE);
+        p.setBirthday(TEST_DATE.toString());
         p.setFirstName("Ivan");
         p.setLastName("Ivanenko");
         p.setLogin("ivan4000");

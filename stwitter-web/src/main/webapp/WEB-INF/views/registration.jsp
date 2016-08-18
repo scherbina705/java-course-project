@@ -52,9 +52,17 @@
 
 
         <div class="col-md-6">
-            <form id="registration-form" role="form" action="register" method="post" commandName="userForm">
+            <form id="registration-form" role="form" action="registration/addUser" method="post" commandName="userForm">
                 <div class="form-group">
-                    <label for="nickname">Nickname:</label>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" path="firstName" id="firstName"/>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" path="lastName" id="lastName"/>
+                </div>
+                <div class="form-group">
+                    <label for="nickname">Nickname/Login:</label>
                     <input type="text" class="form-control" path="nickName" id="nickName"/>
                 </div>
                 <div class="form-group">
@@ -81,7 +89,7 @@
                         <div class='col-sm-6'>
                             <div class="form-group">
                                 <div class="form-group"> <!-- Date input -->
-                                    <label class="control-label" for="date">Date</label>
+                                    <label class="control-label" for="date">Your birthday date:</label>
                                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
                                            type="text"/>
                                 </div>
@@ -109,7 +117,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-<script type="text/javascript" src="/resources/js/datepicker.js"></script>
+<script type="text/javascript" src="/resources/js/registration.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 

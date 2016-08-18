@@ -65,7 +65,7 @@ public class PersonServiceImplTest {
         Person savedPerson = personDao.findById(savedPersonId);
         assertThat(savedPerson.getId()).isNotNull();
         assertThat(savedPerson.getEmail()).isEqualTo(personDto.getEmail());
-        assertThat(savedPerson.getBirthday()).isEqualTo(personDto.getBirthday().toDate());
+        assertThat(savedPerson.getBirthday()).isEqualTo(personDto.getBirthday());
         assertThat(savedPerson.getFirstName()).isEqualTo(personDto.getFirstName());
         assertThat(savedPerson.getLastName()).isEqualTo(personDto.getLastName());
         assertThat(savedPerson.getLogin()).isEqualTo(personDto.getLogin());

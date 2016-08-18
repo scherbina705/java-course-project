@@ -18,14 +18,14 @@ public class PersonDto {
     private String email;
     private String login;
     private String password;
-    private LocalDate birthday;
+    private String birthday;
     private Set<Long> hobbiesId = new HashSet<>();
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
