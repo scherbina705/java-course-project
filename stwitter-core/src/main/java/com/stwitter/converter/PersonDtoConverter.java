@@ -8,7 +8,7 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Created by A.Shcherbina
@@ -34,7 +34,7 @@ public class PersonDtoConverter extends DozerConverter<Person, PersonDto> {
         dto.setBirthday(new LocalDate(person.getBirthday()).toString());
         dto.setEmail(person.getEmail());
         dto.setPassword(person.getPassword());
-        dto.setHobbiesId(person.getHobbiesId());
+        dto.setHobbiesId(new ArrayList<>(person.getHobbiesId()));
         return dto;
     }
 

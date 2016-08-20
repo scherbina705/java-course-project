@@ -52,50 +52,42 @@
 
 
         <div class="col-md-6">
-            <form id="registration-form" role="form" action="registration/addUser" method="post" commandName="userForm">
+            <form id="registration-form" role="form" action="registration/addUser" method="post">
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" path="firstName" id="firstName"/>
+                    <input type="text" class="required form-control" id="firstName"/>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" path="lastName" id="lastName"/>
+                    <input type="text" class="form-control" id="lastName"/>
                 </div>
                 <div class="form-group">
                     <label for="nickname">Nickname/Login:</label>
-                    <input type="text" class="form-control" path="nickName" id="nickName"/>
+                    <input type="text" class="form-control" id="nickName"/>
                 </div>
                 <div class="form-group">
                     <label for="email">Email address:</label>
-                    <input type="email" class="form-control" path="email" id="email"/>
+                    <input type="email" class="form-control" id="email"/>
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" path="password" id="pwd"/>
+                    <input type="password" class="form-control" id="pwd"/>
                 </div>
                 <div class="form-group">
                     <label for="hobbies">Your hobby: </label>
-                    <c:forEach var="postDto" items="${hobbies}">
-                        <div id="hobbies" class="form-group">
-                            <label class="checkbox-inline" title=${postDto.description}>
+                    <div id="hobbies" class="form-group">
+                        <c:forEach var="postDto" items="${hobbies}">
+                            <label class="checkbox-inline" title="${postDto.description}">
                                 <input type="checkbox" value=${postDto.id} path="hobby"/>
                                     ${postDto.title}
                             </label>
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <div class="form-group"> <!-- Date input -->
-                                    <label class="control-label" for="date">Your birthday date:</label>
-                                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
-                                           type="text"/>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="date">Your birthday date:</label>
+                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
+                           type="text"/>
                 </div>
                 <button type="submit" class="btn btn-default center-block">Submit</button>
             </form>

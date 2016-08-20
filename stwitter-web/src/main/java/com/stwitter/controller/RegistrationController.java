@@ -6,13 +6,13 @@ import com.stwitter.service.PersonService;
 import org.joda.time.LocalDate;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Северская on 17.08.2016.
@@ -31,11 +31,13 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration/addUser", method = RequestMethod.POST)
-    public String addStudent(@ModelAttribute PersonDto person,
-                             ModelMap model) {
+    public
+    @ResponseBody
+    PersonDto addStudent(@RequestBody PersonDto person,
+                         ModelMap model) {
         LocalDate birthdate = ISODateTimeFormat.dateTime().parseLocalDate(person.getBirthday());
         person.setBirthday(birthdate.toString());
 //        personService.savePerson(person);
-        return "result";
+        return person;
     }
 }

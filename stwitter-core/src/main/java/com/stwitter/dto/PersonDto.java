@@ -2,10 +2,9 @@ package com.stwitter.dto;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.joda.time.LocalDate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by A.Shcherbina
@@ -19,7 +18,7 @@ public class PersonDto {
     private String login;
     private String password;
     private String birthday;
-    private Set<Long> hobbiesId = new HashSet<>();
+    private List<Long> hobbiesId = new ArrayList<>();
 
     public String getBirthday() {
         return birthday;
@@ -45,11 +44,11 @@ public class PersonDto {
         this.firstName = firstName;
     }
 
-    public Set<Long> getHobbiesId() {
+    public List<Long> getHobbiesId() {
         return hobbiesId;
     }
 
-    public void setHobbiesId(Set<Long> hobbiesId) {
+    public void setHobbiesId(List<Long> hobbiesId) {
         this.hobbiesId = hobbiesId;
     }
 

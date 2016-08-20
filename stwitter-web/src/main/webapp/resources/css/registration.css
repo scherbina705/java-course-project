@@ -1,3 +1,11 @@
+/*[class*="col-"] {*/
+/*border:1px solid red;*/
+/*}*/
+
+/*[class*="row"] {*/
+/*border:1px solid red;*/
+/*}*/
+
 #registration-form {
     margin: 10px;
 }
@@ -6,6 +14,6 @@
     margin: 10px 10px 25px 10px;
 }
 
-#nickname, #email, #pwd {
-    width: 500px;
+#nickname, #email, #pwd, #firstName, #lastName, #date {
+    width: 350px;
 }

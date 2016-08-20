@@ -51,11 +51,11 @@
             <c:forEach var="postDto" items="${latestPosts}">
                 <div class="stwitt">
                     <div class="row stwitt-block">
-                        <div class="avatar col-md-1">
+                        <div class="avatar col-md-1 pull-left">
                             <img src="/resources/images/avatars/${postDto.authorLogin}/avatar.jpg"
                                  class="img-thumbnail avatar"/>
                         </div>
-                        <div class="stwitt-content col-md11">
+                        <div class="stwitt-content col-md-11 pull-right">
                             <div class="author">
                                 <p><b>
                                     <a href="/temp.html">${postDto.authorLogin}</a> &rarr; ${postDto.title}
