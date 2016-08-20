@@ -17,3 +17,7 @@
 #nickname, #email, #pwd, #firstName, #lastName, #date {
     width: 350px;
 }
+
+.error {
+    color: red;
+}

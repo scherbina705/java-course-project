@@ -55,23 +55,23 @@
             <form id="registration-form" role="form" action="registration/addUser" method="post">
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="required form-control" id="firstName"/>
+                    <input type="text" class="required form-control" name="firstName" id="firstName"/>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" id="lastName"/>
+                    <input type="text" class="form-control" name="lastName" id="lastName"/>
                 </div>
                 <div class="form-group">
                     <label for="nickname">Nickname/Login:</label>
-                    <input type="text" class="form-control" id="nickName"/>
+                    <input type="text" class="form-control" name="nickName" id="nickName"/>
                 </div>
                 <div class="form-group">
                     <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email"/>
+                    <input type="email" class="form-control" name="email" id="email"/>
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd"/>
+                    <input type="password" class="form-control" name="pwd" id="pwd"/>
                 </div>
                 <div class="form-group">
                     <label for="hobbies">Your hobby: </label>
@@ -106,6 +106,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<%--for validation form--%>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
