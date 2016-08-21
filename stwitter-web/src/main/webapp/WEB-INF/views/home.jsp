@@ -3,7 +3,7 @@
 <head>
     <title>Stwitter</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/resources/css/home.css">
     <link rel="stylesheet" href="/resources/css/main.css">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -84,7 +84,32 @@
 
 
         <div class="col-md-3">
-
+            <c:choose>
+                <c:when test="${fn:length(allPersons) == 0}">
+                </c:when>
+                <c:otherwise>
+                    <form id="send-post-form" role="form" action="/addNewPost" method="post">
+                        <h4> Send new post for user:</h4>
+                        <div class="form-group">
+                            <label for="person">Select person:</label>
+                            <select class="form-control" id="person">
+                                <c:forEach var="personDto" items="${allPersons}">
+                                    <option>${personDto.login}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">*Title:</label>
+                            <input type="text" class="required form-control" name="title" id="title"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">*Content:</label>
+                            <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default center-block">Submit</button>
+                    </form>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>
@@ -94,7 +119,11 @@
 
 </div>
 </div>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/js/home.js"></script>
 </body>
 </html>

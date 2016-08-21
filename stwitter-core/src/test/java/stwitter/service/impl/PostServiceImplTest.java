@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import stwitter.util.TestServiceUtils;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -73,7 +74,7 @@ public class PostServiceImplTest {
         }
 
         //WHEN
-        LinkedList<PostDto> posts = postService.getLatestPostsForUser(person.getLogin(), expectedPostNumber);
+        List<PostDto> posts = postService.getLatestPostsForUser(person.getLogin(), expectedPostNumber);
 
         //THEN
         assertThat(posts.size()).isEqualTo(expectedPostNumber);
@@ -100,7 +101,7 @@ public class PostServiceImplTest {
         }
 
         //WHEN
-        LinkedList<PostDto> posts = postService.getLatestPosts(expectedPostNumber);
+        List<PostDto> posts = postService.getLatestPosts(expectedPostNumber);
 
         //THEN
         assertThat(posts.size()).isEqualTo(expectedPostNumber);

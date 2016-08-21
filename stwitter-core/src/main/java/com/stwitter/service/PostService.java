@@ -3,13 +3,14 @@ package com.stwitter.service;
 import com.stwitter.dto.PostDto;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by A.Shcherbina
  * on 10.07.2016.
  */
 public interface PostService {
-    LinkedList<PostDto> getLatestPostsForUser(String personLogin, int postsNumber);
+    List<PostDto> getLatestPostsForUser(String personLogin, int postsNumber);
 
     int getAllLikesForPost(Long postId);
 

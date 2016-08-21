@@ -35,7 +35,7 @@ public class Person {
     @Column(name = "PASSWORD")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Hobby> hobbies = new HashSet<>();
 
     @Temporal(TemporalType.DATE)

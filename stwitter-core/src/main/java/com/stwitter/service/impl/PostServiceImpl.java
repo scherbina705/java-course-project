@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,9 +31,9 @@ public class PostServiceImpl implements PostService {
     private DozerBeanMapper mapper;
 
     @Override
-    public LinkedList<PostDto> getLatestPostsForUser(String personLogin, int postsNumber) {
+    public List<PostDto> getLatestPostsForUser(String personLogin, int postsNumber) {
         Set<Post> posts = postDao.findLatestPostsFromPerson(personLogin, postsNumber);
-        LinkedList<PostDto> sortedPostsDto = new LinkedList<>();
+        ArrayList<PostDto> sortedPostsDto = new ArrayList<>();
         for (Post p : posts) {
             sortedPostsDto.add(mapper.map(p, PostDto.class));
         }

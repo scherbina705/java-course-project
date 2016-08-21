@@ -11,6 +11,8 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -41,6 +43,16 @@ public class PersonServiceImpl implements PersonService {
     public boolean isLoginAvailable(String login) {
         Person person = personDao.findByLogin(login);
         return Objects.isNull(person);
+    }
+
+    @Override
+    public List<PersonDto> getAllPersons() {
+        List<PersonDto> persons = new ArrayList<>();
+        for (Person person : personDao.findAll()){
+            persons.add(mapper.map(person,PersonDto.class));
+        }
+//        personDao.findAll().stream().forEach(person -> persons.add(mapper.map(person, PersonDto.class)));
+        return persons;
     }
 
     @Override
