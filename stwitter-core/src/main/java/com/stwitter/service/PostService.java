@@ -17,4 +17,6 @@ public interface PostService {
     LinkedList<PostDto> getLatestPosts(int postsNumber);
 
     void likePost(Long postId, String personLogin);
+
+    Long createNewPost(PostDto post);
 }

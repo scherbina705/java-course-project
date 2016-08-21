@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService {
         for (Post p : posts) {
             sortedPostsDto.add(mapper.map(p, PostDto.class));
         }
-        sortedPostsDto.sort((PostDto o1, PostDto o2) -> o1.getPlaceTime().compareTo(o2.getPlaceTime()));
+        sortedPostsDto.sort((PostDto o1, PostDto o2) -> o2.getPlaceTime().compareTo(o1.getPlaceTime()));
         return sortedPostsDto;
     }
 
@@ -51,17 +51,22 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public LinkedList<PostDto> getLatestPosts(int postsNumber) {
-        Set<Post> posts = postDao.findLatestPosts(postsNumber);
+        List<Post> posts = postDao.findLatestPosts(postsNumber);
         LinkedList<PostDto> sortedPostsDto = new LinkedList<>();
         for (Post p : posts) {
             sortedPostsDto.add(mapper.map(p, PostDto.class));
         }
-        sortedPostsDto.sort((PostDto o1, PostDto o2) -> o1.getPlaceTime().compareTo(o2.getPlaceTime()));
+        sortedPostsDto.sort((PostDto o1, PostDto o2) -> o2.getPlaceTime().compareTo(o1.getPlaceTime()));
         return sortedPostsDto;
     }
 
     @Override
     public void likePost(Long postId, String personLogin) {
         postDao.likePost(postDao.findById(postId), personDao.findByLogin(personLogin));
+    }
+
+    @Override
+    public Long createNewPost(PostDto post) {
+        return postDao.save(mapper.map(post, Post.class));
     }
 }

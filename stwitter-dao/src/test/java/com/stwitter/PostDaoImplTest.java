@@ -66,7 +66,7 @@ public class PostDaoImplTest extends TestAbstractDao {
         }
 
         //WHEN
-        Set<Post> posts = postDao.findLatestPosts(expectedPostNumber);
+        List<Post> posts = postDao.findLatestPosts(expectedPostNumber);
 
         //THEN
         assertThat(posts.size()).isEqualTo(expectedPostNumber);

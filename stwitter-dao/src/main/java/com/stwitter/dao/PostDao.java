@@ -3,6 +3,7 @@ package com.stwitter.dao;
 import com.stwitter.entity.Person;
 import com.stwitter.entity.Post;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 public interface PostDao extends GenericDao<Post, Long> {
 
-    Set<Post> findLatestPosts(Integer postsNumber);
+    List<Post> findLatestPosts(Integer postsNumber);
 
     Set<Post> findLatestPostsFromPerson(String personLogin, Integer postsNumber);
 

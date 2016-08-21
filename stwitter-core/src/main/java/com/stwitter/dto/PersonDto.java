@@ -18,8 +18,9 @@ public class PersonDto {
     private String login;
     private String password;
     private String birthday;
-    private List<Long> hobbiesId = new ArrayList<>();
+    private String avatarName;
 
+    private List<Long> hobbiesId = new ArrayList<>();
     public String getBirthday() {
         return birthday;
     }
@@ -82,6 +83,14 @@ public class PersonDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAvatarName() {
+        return avatarName;
+    }
+
+    public void setAvatarName(String avatarName) {
+        this.avatarName = avatarName;
     }
 
     @Override

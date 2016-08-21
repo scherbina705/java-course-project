@@ -57,7 +57,7 @@
             <version>${spring-security.version}</version>
         </dependency>
 
-        <!-- JSTL TODO: needed or not?-->
+        <!-- JSTL-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>

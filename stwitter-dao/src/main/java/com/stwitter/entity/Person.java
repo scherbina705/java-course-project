@@ -35,6 +35,9 @@ public class Person {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "AVATAR_NAME")
+    private String avatarName = "default";
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Hobby> hobbies = new HashSet<>();
 
@@ -50,10 +53,10 @@ public class Person {
         return login;
     }
 
-
     public void setLogin(String login) {
         this.login = login;
     }
+
 
     public String getPassword() {
         return password;
@@ -67,10 +70,10 @@ public class Person {
         return id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public Set<Hobby> getHobbies() {
         return hobbies;
@@ -126,6 +129,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatarName() {
+        return avatarName;
+    }
+
+    public void setAvatarName(String avatarName) {
+        this.avatarName = avatarName;
     }
 
     public Set<Long> getHobbiesId() {

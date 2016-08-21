@@ -1,10 +1,13 @@
 package com.stwitter.controller;
 
 import com.stwitter.dto.HobbyDto;
+import com.stwitter.dto.PersonDto;
 import com.stwitter.dto.PostDto;
+import com.stwitter.entity.Person;
 import com.stwitter.service.InterestService;
 import com.stwitter.service.PersonService;
 import com.stwitter.service.PostService;
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -40,27 +45,20 @@ public class HomeController {
     @RequestMapping({"/home"})
     public String home(Model model) {
         model.addAttribute("latestPosts", postService.getLatestPosts(POSTS_NUMBER));
-        model.addAttribute("allPersons", personService.getAllPersons());
+        List<PersonDto> persons = personService.getAllPersons();
+        model.addAttribute("allPersons", persons);
+        Map<String, String> personAvatarNames = new HashMap<>();
+        for (PersonDto person : persons){
+            personAvatarNames.put(person.getLogin(), person.getAvatarName());
+        }
+        model.addAttribute("personAvatarsMap", personAvatarNames);
         return "home";
-    }
-
-    @RequestMapping({"/getLatestStwitts"})
-    public
-    @ResponseBody
-    List<PostDto> getLatestStwitts() {
-        return postService.getLatestPosts(POSTS_NUMBER);
-    }
-
-    @RequestMapping({"/getAllHobbies"})
-    public
-    @ResponseBody
-    Set<HobbyDto> getAllHobbies() {
-        return interestService.getAllHobbies();
     }
 
     @RequestMapping(value = "/addNewPost", method = RequestMethod.POST)
     public String addNewPost(@RequestBody PostDto post) {
-//        post.getPlaceTime();
+        post.setPlaceTime(LocalDateTime.now());
+        postService.createNewPost(post);
         return "home";
     }
 

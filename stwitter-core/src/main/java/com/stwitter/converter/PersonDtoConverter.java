@@ -35,6 +35,7 @@ public class PersonDtoConverter extends DozerConverter<Person, PersonDto> {
         dto.setEmail(person.getEmail());
         dto.setPassword(person.getPassword());
         dto.setHobbiesId(new ArrayList<>(person.getHobbiesId()));
+        dto.setAvatarName(person.getAvatarName());
         return dto;
     }
 
@@ -48,6 +49,7 @@ public class PersonDtoConverter extends DozerConverter<Person, PersonDto> {
         entity.setBirthday(LocalDate.parse(personDto.getBirthday()).toDate());
         entity.setEmail(personDto.getEmail());
         entity.setPassword(personDto.getPassword());
+        if (personDto.getAvatarName()!=null) entity.setAvatarName(personDto.getAvatarName());
         if (!personDto.getHobbiesId().isEmpty()) {
             personDto.getHobbiesId().stream().forEach(hobbyId -> entity.getHobbies().add(hobbyDao.findById(hobbyId)));
         }

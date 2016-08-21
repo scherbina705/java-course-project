@@ -8,10 +8,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by A.Shcherbina
@@ -37,9 +34,9 @@ public class PostDaoImpl extends AbstractDao<Post, Long> implements PostDao {
     }
 
     @Override
-    public Set<Post> findLatestPosts(Integer postsNumber) {
+    public List<Post> findLatestPosts(Integer postsNumber) {
         Query query = getSession().createQuery("select p from Post p order by p.placeTime desc").setMaxResults(postsNumber);
-        return new HashSet<>(query.list());
+        return new ArrayList<>(query.list());
     }
 
     @Override

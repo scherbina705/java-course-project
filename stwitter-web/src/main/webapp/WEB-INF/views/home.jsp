@@ -57,7 +57,7 @@
                 <div class="stwitt">
                     <div class="row stwitt-block">
                         <div class="avatar col-md-1 pull-left">
-                            <img src="/resources/images/avatars/${postDto.authorLogin}/avatar.jpg"
+                            <img src="/resources/images/avatars/${personAvatarsMap.get(postDto.authorLogin)}.jpg"
                                  class="img-thumbnail avatar"/>
                         </div>
                         <div class="stwitt-content col-md-11 pull-right">
@@ -89,7 +89,8 @@
                 </c:when>
                 <c:otherwise>
                     <form id="send-post-form" role="form" action="/addNewPost" method="post">
-                        <h4> Send new post for user:</h4>
+                        <h4 class='text-center'> <u>Send new post for user:</u></h4>
+                        <p><span class='glyphicons glyphicons-tick'></span></p>
                         <div class="form-group">
                             <label for="person">Select person:</label>
                             <select class="form-control" id="person">

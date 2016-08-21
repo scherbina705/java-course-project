@@ -48,15 +48,6 @@ public class PostServiceImplTest {
     @Autowired
     private HobbyDao hobbyDao;
 
-
-//    List<PostDto> getLatestPostsForUser(String personLogin, int postNumber);
-//
-//    int getAllLikesForPost(Long postId);
-//
-//    SortedSet<PostDto> getLatestPosts(int postsNumber);
-//
-//    void likePost(Long postId, String personLogin);
-
     @Test
     @Transactional
     @Rollback(true)
@@ -81,7 +72,7 @@ public class PostServiceImplTest {
 //        for (PostDto p : posts) {
 //            assertThat(p.getPerson().getLogin()).isEqualTo(person.getLogin());
 //        }
-        assertThat(posts).isSortedAccordingTo((PostDto o1, PostDto o2) -> o1.getPlaceTime().compareTo(o2.getPlaceTime()));
+        assertThat(posts).isSortedAccordingTo((PostDto o1, PostDto o2) -> o2.getPlaceTime().compareTo(o1.getPlaceTime()));
     }
 
     @Test
@@ -105,7 +96,7 @@ public class PostServiceImplTest {
 
         //THEN
         assertThat(posts.size()).isEqualTo(expectedPostNumber);
-        assertThat(posts).isSortedAccordingTo((PostDto o1, PostDto o2) -> o1.getPlaceTime().compareTo(o2.getPlaceTime()));
+        assertThat(posts).isSortedAccordingTo((PostDto o1, PostDto o2) -> o2.getPlaceTime().compareTo(o1.getPlaceTime()));
     }
 
     @Test
