@@ -3,12 +3,13 @@
 <head>
     <title>Stwitter</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/resources/css/home.css">
     <link rel="stylesheet" href="/resources/css/main.css">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 </head>
 <body>
 <div class="container-fluid">
@@ -26,13 +27,13 @@
                                 <span class="glyphicon glyphicon-home"></span>
                             </a>
                         </li>
-                        <li><a href="#">My profile</a></li>
-                        <li><a href="#">My stwits</a></li>
+                       <sec:authorize access="isAuthenticated()"> <li><a href="#">My profile</a></li> </sec:authorize>
+                        <li><a href="/user/stwitts">My stwits</a></li>
                         <li><a href="#">Search people <span class="glyphicon glyphicon-search"></span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/registration"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="/user-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </nav>
@@ -94,7 +95,7 @@
 
 </div>
 </div>
-<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>

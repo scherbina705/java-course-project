@@ -14,6 +14,9 @@
 
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+    <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+    <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
+
 </head>
 <body>
 <div class="container-fluid">
@@ -36,64 +39,45 @@
                         <li><a href="#">Search people <span class="glyphicon glyphicon-search"></span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="/registration"><span class="glyphicon glyphicon-user"></span>
+                        <li><a href="/registration"><span class="glyphicon glyphicon-user"></span>
                             Register</a></li>
-                        <li><a href="/user-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li class="active"><a href="/user-login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
 
-    <%--Latests stweets--%>
     <div class="row">
         <div class="col-md-3">
 
         </div>
 
-
+        <c:url value="http://localhost:8080/login" var="loginUrl" />
         <div id="main-content" class="col-md-6">
-            <form id="registration-form" role="form" action="registration/addUser" method="post">
-                <h3> Please, fill this registration form to be able to add posts on this site.</h3>
+            <form id="login-form" role="form" action="${loginUrl}" method="post">
+                <h3> Please, enter you login and password:.</h3>
                 <div class="form-group">
-                    <label for="firstName">*First Name:</label>
-                    <input type="text" class="required form-control" name="firstName" id="firstName"/>
+                    <label for="login">*First Name:</label>
+                    <input type="text" class="required form-control" name="j_username" id="login"/>
                 </div>
                 <div class="form-group">
-                    <label for="lastName">*Last Name:</label>
-                    <input type="text" class="form-control" name="lastName" id="lastName"/>
+                    <label for="password">*Last Name:</label>
+                    <input type="password" class="form-control" name="j_password" id="password"/>
                 </div>
                 <div class="form-group">
-                    <label for="nickname">*Nickname/Login:</label>
-                    <input type="text" class="form-control" name="nickName" id="nickName"/>
+                    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                 </div>
-                <div class="form-group">
-                    <label for="email">*Email address:</label>
-                    <input type="email" class="form-control" name="email" id="email"/>
-                </div>
-                <div class="form-group">
-                    <label for="pwd">*Password:</label>
-                    <input type="password" class="form-control" name="pwd" id="pwd"/>
-                </div>
-                <div class="form-group">
-                    <label for="hobbies">Your hobby: </label>
-                    <div id="hobbies" class="form-group">
-                        <c:forEach var="postDto" items="${hobbies}">
-                            <label class="checkbox-inline" title="${postDto.description}">
-                                <input type="checkbox" value=${postDto.id} path="hobby"/>
-                                    ${postDto.title}
-                            </label>
-                        </c:forEach>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="date">*Your birthday date:</label>
-                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
-                           type="text"/>
-                </div>
+                <p>
+                    <c:if test="${error == true}">
+                        <b class="error">Invalid login or password.</b>
+                    </c:if>
+                </p>
                 <button type="submit" class="btn btn-default center-block">Submit</button>
             </form>
         </div>
+
+
         <div class="col-md-3">
 
         </div>

@@ -98,7 +98,10 @@ function sendRegisterUserPostRequest() {
         processData: false, //To avoid making query String instead of JSON
         success: function (resposeJsonObject) {
             $("#registration-form").replaceWith(function () {
-                return "<h3>Thanks for registration, " + resposeJsonObject.firstName + " " + resposeJsonObject.firstName + ". Your login is " + resposeJsonObject.login + " </h3>"
+                return "<h3 class='text-center'>Thanks for registration, <b>" + resposeJsonObject.firstName + " " + resposeJsonObject.firstName + "</b>." +
+                    "<br/> Your login is <b>" + resposeJsonObject.login + "</b> " +
+                    "<br/> One day details will be sent to your email "+ resposeJsonObject.email + ", but this day is not today"
+                    "</h3>"
             })
         }
     });

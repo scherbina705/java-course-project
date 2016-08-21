@@ -62,4 +62,9 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String processRegistration() {
+        return "error";
+    }
+
 }
