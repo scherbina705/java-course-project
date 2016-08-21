@@ -5,8 +5,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/resources/css/home.css">
+    <link rel="stylesheet" href="/resources/css/main.css">
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <body>
 <div class="container-fluid">
@@ -48,6 +50,9 @@
             <h2>What people stwitted recently:</h2>
             <%--Message block--%>
 
+            <c:if test="${fn:length(latestPosts) == 0}">
+                <h3>Uuups, there are no posts yet...</h3>
+            </c:if>
             <c:forEach var="postDto" items="${latestPosts}">
                 <div class="stwitt">
                     <div class="row stwitt-block">

@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/resources/css/home.css">
     <link rel="stylesheet" href="/resources/css/registration.css">
+    <link rel="stylesheet" href="/resources/css/main.css">
     <%----%>
 
     <link rel="stylesheet"
@@ -51,26 +52,27 @@
         </div>
 
 
-        <div class="col-md-6">
+        <div id="main-content" class="col-md-6">
             <form id="registration-form" role="form" action="registration/addUser" method="post">
+                <h3> Please, fill this registration form to be able to add posts on this site.</h3>
                 <div class="form-group">
-                    <label for="firstName">First Name:</label>
+                    <label for="firstName">*First Name:</label>
                     <input type="text" class="required form-control" name="firstName" id="firstName"/>
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Last Name:</label>
+                    <label for="lastName">*Last Name:</label>
                     <input type="text" class="form-control" name="lastName" id="lastName"/>
                 </div>
                 <div class="form-group">
-                    <label for="nickname">Nickname/Login:</label>
+                    <label for="nickname">*Nickname/Login:</label>
                     <input type="text" class="form-control" name="nickName" id="nickName"/>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email address:</label>
+                    <label for="email">*Email address:</label>
                     <input type="email" class="form-control" name="email" id="email"/>
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Password:</label>
+                    <label for="pwd">*Password:</label>
                     <input type="password" class="form-control" name="pwd" id="pwd"/>
                 </div>
                 <div class="form-group">
@@ -85,7 +87,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="date">Your birthday date:</label>
+                    <label class="control-label" for="date">*Your birthday date:</label>
                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
                            type="text"/>
                 </div>

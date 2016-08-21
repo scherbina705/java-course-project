@@ -1,26 +1,3 @@
-/*[class*="col-"] {*/
-/*border:1px solid red;*/
-/*}*/
-
-/*[class*="row"] {*/
-/*border:1px solid red;*/
-/*}*/
-
-#menu {
-    margin: 0;
-}
-
-#logo {
-    margin-right: 15px;
-}
-
-#main-content {
-    min-height: 100%;
-    padding-left: 30px;
-    padding-right: 40px;
-    padding-bottom: 40px;
-    background-color: aliceblue;
-}
 
 .stwitt-block {
     margin: 10px;

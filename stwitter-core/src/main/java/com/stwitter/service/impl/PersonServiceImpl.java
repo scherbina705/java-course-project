@@ -11,6 +11,8 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * Created by A.Shcherbina
  * on 24.07.2016.
@@ -34,6 +36,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private DozerBeanMapper mapper;
+
+    @Override
+    public boolean isLoginAvailable(String login) {
+        Person person = personDao.findByLogin(login);
+        return Objects.isNull(person);
+    }
 
     @Override
     public Long savePerson(PersonDto personDto) {

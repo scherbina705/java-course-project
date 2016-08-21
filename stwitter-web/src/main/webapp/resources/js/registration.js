@@ -15,7 +15,7 @@ function validateInputFields() {
                 required: true,
                 minlength: 5,
                 maxlength: 15,
-                notnumbers: true
+                loginNotAvailable: true
             },
             date: "required"
         },
@@ -26,7 +26,7 @@ function validateInputFields() {
             nickName: {
                 required: "Please enter your login/nickname",
                 minlength: "Your login/nickname must be from 5 to 15 characters long",
-                notnumbers: "Shouldn't be numbers"
+                loginNotAvailable: "Sorry this login is already taken"
             },
             date: "Please enter your birthdate",
             pwd: {
@@ -44,18 +44,17 @@ function validateInputFields() {
 }
 
 $(document).ready(function () {
-    $.validator.addMethod("notnumbers", function (value, element) {
+    $.validator.addMethod("loginNotAvailable", function (value, element) {
         var response = null;
-        $.get(
-            "/registration/isLoginAvailable",
-            {
-                login: "12345"
-            },
-            function(data){
+        $.ajax({
+            type: "GET",
+            url: "/registration/isLoginAvailable",
+            data: {login: value},
+            async: false,
+            success: function (data) {
                 response = data;
             }
-        );
-
+        });
         return response == true;
     });
 
@@ -66,6 +65,7 @@ $(document).ready(function () {
         container: container,
         todayHighlight: true,
         autoclose: true,
+        defaultViewDate: {year: 2000, month: 0, day: 1}
     };
     date_input.datepicker(options);
     validateInputFields();
@@ -97,7 +97,9 @@ function sendRegisterUserPostRequest() {
         cache: false,    //This will force requested pages not to be cached by the browser
         processData: false, //To avoid making query String instead of JSON
         success: function (resposeJsonObject) {
-            alert(resposeJsonObject);
+            $("#registration-form").replaceWith(function () {
+                return "<h3>Thanks for registration, " + resposeJsonObject.firstName + " " + resposeJsonObject.firstName + ". Your login is " + resposeJsonObject.login + " </h3>"
+            })
         }
     });
 }
@@ -105,9 +107,5 @@ function sendRegisterUserPostRequest() {
 
 
 
-//$.ajax({
-//    type: "GET",
-//    url: "/registration/isLoginAvailable",
-//    data: {login: "123456"},
-//    async: false
-//});
+
+

@@ -12,4 +12,6 @@ public interface PersonService {
     void removePerson(String personLogin);
 
     void addFriendship(String personLogin, String friendLogin);
+
+    boolean isLoginAvailable(String login);
 }

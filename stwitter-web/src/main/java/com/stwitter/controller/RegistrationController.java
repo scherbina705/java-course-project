@@ -8,7 +8,6 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -30,16 +29,17 @@ public class RegistrationController {
     @RequestMapping(value = "/registration/addUser", method = RequestMethod.POST)
     public
     @ResponseBody
-    PersonDto addStudent(@RequestBody PersonDto person,
-                         ModelMap model) {
+    PersonDto registerNewUser(@RequestBody PersonDto person) {
         LocalDate birthdate = ISODateTimeFormat.dateTime().parseLocalDate(person.getBirthday());
         person.setBirthday(birthdate.toString());
-//        personService.savePerson(person);
+        personService.savePerson(person);
         return person;
     }
 
     @RequestMapping({"/registration/isLoginAvailable"})
-    public @ResponseBody boolean isLoginAvailable(@RequestParam(value = "login") String login) {
-        return "123456".equals(login);
+    public
+    @ResponseBody
+    boolean isLoginAvailable(@RequestParam(value = "login") String login) {
+        return personService.isLoginAvailable(login);
     }
 }
