@@ -26,13 +26,13 @@
                                 <span class="glyphicon glyphicon-home"></span>
                             </a>
                         </li>
-                        <li><a href="#">My profile</a></li>
-                        <li><a href="#">My stwits</a></li>
-                        <li><a href="#">Search people <span class="glyphicon glyphicon-search"></span></a></li>
+                        <li><a href="/not-ready">My profile</a></li>
+                        <li><a href="/not-ready">My stwits</a></li>
+                        <li><a href="/not-ready">Search people <span class="glyphicon glyphicon-search"></span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/registration"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="/not-ready"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div>
             </nav>
